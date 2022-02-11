@@ -77,11 +77,9 @@ function App() {
             }
           />
 
-          <Route
-            exact
-            path="/"
-            element={<Login onLogin={handleLogin} />}
-          />
+
+          <Route exact path="/" element={<Login onLogin={handleLogin} />} />
+
           {errors ? errors.map((e) => <div>{e}</div>) : null}
         </Routes>
       </div>
