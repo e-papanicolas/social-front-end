@@ -1,11 +1,11 @@
-import "../styles/Friends.css";
+import "../index.css";
 
 function Friends({ user }) {
   return (
-    <div id="friends-container">
+    <div className="bg-yellow-100 min-h-screen flex felx-col flex flex-col">
       <p>friends page</p>
-      <div id="welcome">
-        <h1>WELCOME {user.first_name}</h1>
+      <div className="">
+        <h1 className="text-xl font-bold">WELCOME {user.first_name}</h1>
       </div>
     </div>
   );
