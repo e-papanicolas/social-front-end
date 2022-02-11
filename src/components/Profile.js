@@ -1,11 +1,11 @@
-import "../styles/Profile.css";
+import "../index.css"
 
 function Profile({ user }) {
   return (
-    <div id="profile-container">
+    <div className="bg-yellow-200">
       <p>profile page</p>
       <div id="welcome">
-        <h1>WELCOME {user.first_name}</h1>
+        <h1 className="text-3xl font-bold underline">WELCOME {user.first_name}</h1>
       </div>
     </div>
   );
