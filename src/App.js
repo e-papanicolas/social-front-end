@@ -35,7 +35,7 @@ function App() {
   function handleLogOut() {
     setLoggedIn(false);
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   }
 
   useEffect(() => {
@@ -71,11 +71,7 @@ function App() {
             }
           />
 
-          <Route
-            exact
-            path="/login"
-            element={<Login onLogin={handleLogin} />}
-          />
+          <Route exact path="/" element={<Login onLogin={handleLogin} />} />
           {errors ? errors.map((e) => <div>{e}</div>) : null}
         </Routes>
       </div>
