@@ -1,11 +1,11 @@
-import "../styles/Feed.css";
+import "../index.css";
 
 function Feed({ user }) {
   return (
-    <div id="feed-container">
+    <div className="bg-yellow-100 min-h-screen flex flex-col">
       <p>feed</p>
       <div id="welcome">
-        <h1>WELCOME {user.first_name}</h1>
+        <h1 className="text-xl font-bold">WELCOME {user.first_name}</h1>
       </div>
     </div>
   );
