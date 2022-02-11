@@ -9,6 +9,8 @@ import Profile from "./components/Profile";
 import Chat from "./components/Chat";
 import Friends from "./components/Friends";
 
+import "./index.css"
+
 function App() {
   const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ function App() {
   function handleLogOut() {
     setLoggedIn(false);
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
   }
 
   useEffect(() => {
@@ -57,6 +59,10 @@ function App() {
     });
   }, [token]);
 
+  if (currentUser.name === "") {
+    return <p>LOADING...</p>;
+  }
+
   if (loggedIn === false) {
     return (
       <div>
@@ -73,7 +79,7 @@ function App() {
 
           <Route
             exact
-            path="/login"
+            path="/"
             element={<Login onLogin={handleLogin} />}
           />
           {errors ? errors.map((e) => <div>{e}</div>) : null}
