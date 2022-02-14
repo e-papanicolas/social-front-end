@@ -1,12 +1,16 @@
-import "../styles/Chat.css";
+import { UserContext } from "../App";
+import { useContext, useState, useEffect } from "react";
 
-function Chat({ user }) {
+function Chat({ friend }) {
+  const user = useContext(UserContext);
+  const token = localStorage.getItem("jwt");
+
   return (
-    <div className="bg-yellow-100 flex flex-col min-h-screen p-72">
-      <p>chat page</p>
-      <div>
-        <h1 className="text-xl font-bold">WELCOME {user.first_name}</h1>
-      </div>
+    <div>
+      <p>User:</p>
+      <p>{user.username}</p>
+      <p>Friend:</p>
+      <p>{friend.username}</p>
     </div>
   );
 }
