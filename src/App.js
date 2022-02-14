@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login";
@@ -9,7 +9,8 @@ import Profile from "./components/Profile";
 import Chat from "./components/Chat";
 import Friends from "./components/Friends";
 
-import "./index.css"
+import "./index.css";
+export const UserContext = createContext();
 
 function App() {
   const token = localStorage.getItem("jwt");
@@ -77,7 +78,6 @@ function App() {
             }
           />
 
-
           <Route exact path="/" element={<Login onLogin={handleLogin} />} />
 
           {errors ? errors.map((e) => <div>{e}</div>) : null}
@@ -89,13 +89,15 @@ function App() {
   return (
     <div className="App">
       <div className="background"></div>
-      <NavBar handleLogOut={handleLogOut} user={currentUser} />
-      <Routes>
-        <Route path="/me" element={<Profile user={currentUser} />} />
-        <Route path="/chat" element={<Chat user={currentUser} />} />
-        <Route path="/friends" element={<Friends user={currentUser} />} />
-        <Route path="/" element={<Feed user={currentUser} />} />
-      </Routes>
+      <UserContext.Provider value={currentUser}>
+        <NavBar handleLogOut={handleLogOut} user={currentUser} />
+        <Routes>
+          <Route path="/me" element={<Profile user={currentUser} />} />
+          <Route path="/chat" element={<Chat user={currentUser} />} />
+          <Route path="/friends" element={<Friends user={currentUser} />} />
+          <Route path="/" element={<Feed user={currentUser} />} />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

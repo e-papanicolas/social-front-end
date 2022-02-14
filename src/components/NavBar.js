@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
-import "../index.css"
+import "../index.css";
 
 function NavBar({ handleLogOut }) {
   return (
-      <div className="min-w-screen h-20 bg-gray-500 flex justify-between items-center p-50">
+    <div className="min-w-screen h-20 bg-gray-500 flex justify-between items-center p-50">
       <h1 className="text-2xl">social-media-app</h1>
 
       <div className="">
@@ -35,7 +35,6 @@ function NavBar({ handleLogOut }) {
         </ul>
       </div>
     </div>
-    
   );
 }
 
