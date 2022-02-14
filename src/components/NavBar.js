@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
-import "../index.css";
+import "../index.css"
 
 function NavBar({ handleLogOut }) {
   return (
+
     <div
       className="w-70 h-full shadow-md bg-white absolute z-10"
       id="sidenavSecExample"
@@ -25,6 +26,7 @@ function NavBar({ handleLogOut }) {
             </div>
             <div className="grow ml-3">
               <p className="text-sm font-semibold text-blue-600">Users Name</p>
+
             </div>
             <div className="grow ml-3">
               <button

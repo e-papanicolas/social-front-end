@@ -18,6 +18,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
+
+  const [posts, setPosts] = useState([]);
+ 
   const [allUsers, setAllUsers] = useState([]);
 
   function handleLogin(user) {
@@ -60,7 +63,49 @@ function App() {
         });
       }
     });
+
+    fetch("http://localhost:3000/posts", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setPosts(data);
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data.errors);
+        });
+      }
+    });
+
   }, [token]);
+
+  function handleAddPost(newPost, e) {
+    e.preventDefault();
+    console.log(newPost);
+
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newPost)
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          const updatedPosts = [...currentUser.posts, data]
+          setCurrentUser({...currentUser, posts: updatedPosts});
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data.errors);
+        });
+      }
+    });
+  }
 
   // gets all users
   useEffect(() => {
@@ -108,8 +153,8 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="background"></div>
+    <div className="">
+      <div className=""></div>
       <UserContext.Provider value={currentUser}>
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>
@@ -119,7 +164,7 @@ function App() {
             element={<Messages user={currentUser} allUsers={allUsers} />}
           />
           <Route path="/friends" element={<Friends user={currentUser} />} />
-          <Route path="/" element={<Feed user={currentUser} />} />
+          <Route path="/" element={<Feed user={currentUser} posts={posts} handleAddPost={handleAddPost}/>} />
         </Routes>
       </UserContext.Provider>
     </div>
