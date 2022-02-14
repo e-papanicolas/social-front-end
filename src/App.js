@@ -18,7 +18,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
-
+  const [posts, setPosts] = useState([]);
+  
   function handleLogin(user) {
     setCurrentUser(user);
     setLoggedIn(true);
@@ -58,7 +59,56 @@ function App() {
         });
       }
     });
+
+    fetch("http://localhost:3000/posts", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setPosts(data);
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data.errors);
+        });
+      }
+    });
+
   }, [token]);
+
+ 
+
+  function handleAddPost(newPost, e) {
+    e.preventDefault();
+    console.log(newPost);
+
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newPost)
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          const updatedPosts = [...currentUser.posts, data]
+          setCurrentUser({...currentUser, posts: updatedPosts});
+          setPosts([{content: data.content, created_at: data.created_at, user: currentUser}, ...posts]);
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data.errors);
+        });
+      }
+    });
+  }
+
+  console.log(posts);
+
+  console.log(currentUser);
 
   if (currentUser.name === "") {
     return <p>LOADING...</p>;
@@ -87,15 +137,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="background"></div>
+    <div className="">
+      <div className=""></div>
       <UserContext.Provider value={currentUser}>
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>
           <Route path="/me" element={<Profile user={currentUser} />} />
           <Route path="/chat" element={<Chat user={currentUser} />} />
           <Route path="/friends" element={<Friends user={currentUser} />} />
-          <Route path="/" element={<Feed user={currentUser} />} />
+          <Route path="/" element={<Feed posts={posts} handleAddPost={handleAddPost}/>} />
         </Routes>
       </UserContext.Provider>
     </div>
