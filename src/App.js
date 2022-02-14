@@ -23,6 +23,8 @@ function App() {
  
   const [allUsers, setAllUsers] = useState([]);
 
+  console.log(allUsers);
+
   function handleLogin(user) {
     setCurrentUser(user);
     setLoggedIn(true);

@@ -1,83 +1,67 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React from "react";
-import "../index.css"
+import "../index.css";
+import 'tw-elements';
 
-function NavBar({ handleLogOut }) {
+function NavBar({ user, handleLogOut }) {
+  const navigate = useNavigate();
+
+
   return (
 
     <div
-      className="w-70 h-full shadow-md bg-white absolute z-10"
+      className="w-70 h-full shadow-md bg-gray-300 absolute z-10"
       id="sidenavSecExample"
     >
       <div className="pt-4 pb-2 px-6">
-        <a href="#!">
           <div className="grow ml-3">
-            <p className="text-sm font-semibold text-blue-600">
-              Social Media App Name
+            <p className="text-2xl font-semibold text-stone-700">
+              App Name
             </p>
           </div>
           <div className="flex items-center">
-            <div className="shrink-0">
-              <img
-                src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
-                className="rounded-full w-10"
-                alt="Avatar"
-              />
-            </div>
-            <div className="grow ml-3">
-              <p className="text-sm font-semibold text-blue-600">Users Name</p>
+            <div className="flex mt-5">
+              <div className="shrink-0">
+                <img
+                  src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+                  className="rounded-full w-10"
+                  alt="Avatar"
+                />
+              </div>
+              <div className="grow ml-3 pt-2">
+                <p className="text-md font-semibold text-stone-700">{user.first_name} {user.last_name}</p>
 
-            </div>
-            <div className="grow ml-3">
-              <button
-                className="bg-white hover:bg-gray-100 text-gray-800 py-1 px-2 text-xs border border-gray-400 rounded shadow"
-                onClick={null}
-              >
-                Log Out
-              </button>
+              </div>
             </div>
           </div>
-        </a>
+   
       </div>
 
-      <ul className="relative px-1 mt-10">
-        <li className="relative">
-          <NavLink
-            to="/me"
-            className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-          >
-            Profile
-          </NavLink>
+      <ul class="relative px-1 mt-5">
+        <li class="relative" onClick={() => navigate("/me")}>
+          <a class="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="yellow">
+            <span>Profile</span>
+          </a>
         </li>
-      </ul>
-      <ul className="relative px-1">
-        <li className="relative">
-          <NavLink
-            to="/"
-            className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-          >
-            <span>Feed</span>
-          </NavLink>
+        <li class="relative" onClick={() => navigate("/")}>
+          <a class="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="yellow">
+            <span>Newsfeed</span>
+          </a>
         </li>
-      </ul>
-      <ul className="relative px-1">
-        <li className="relative">
-          <NavLink
-            to="/chat"
-            className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-          >
-            <span>Chat</span>
-          </NavLink>
-        </li>
-      </ul>
-      <ul className="relative px-1">
-        <li className="relative">
-          <NavLink
-            to="/friends"
-            className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out"
-          >
+        <li class="relative" onClick={() => navigate("friends")}>
+          <a class="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="yellow">
             <span>Friends</span>
-          </NavLink>
+          </a>
+        </li>
+        <li class="relative" onClick={() => navigate("/chat")}>
+          <a class="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="yellow">
+            <span>Chat</span>
+          </a>
+        </li>
+        <li class="relative mt-5" onClick={handleLogOut}>
+          <a class="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="yellow">
+            <span>Logout</span>
+          </a>
         </li>
       </ul>
     </div>
