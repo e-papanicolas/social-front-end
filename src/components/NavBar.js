@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
-import "../index.css"
+import "../index.css";
 
 function NavBar({ handleLogOut }) {
 
 
   return (
+
     <div className="w-70 h-full shadow-md bg-white absolute" id="sidenavSecExample">
             <div className="pt-4 pb-2 px-6">
                 <a href="#!">
