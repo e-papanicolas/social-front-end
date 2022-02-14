@@ -6,7 +6,7 @@ import SignUp from "./components/SignUp";
 import Feed from "./components/Feed";
 import NavBar from "./components/NavBar";
 import Profile from "./components/Profile";
-import Chat from "./components/Chat";
+import Messages from "./components/Messages";
 import Friends from "./components/Friends";
 
 import "./index.css";
@@ -18,6 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   function handleLogin(user) {
     setCurrentUser(user);
@@ -41,6 +42,7 @@ function App() {
     navigate("/");
   }
 
+  // verifies user for auth
   useEffect(() => {
     fetch("http://localhost:3000/me", {
       headers: {
@@ -51,6 +53,25 @@ function App() {
         res.json().then((data) => {
           setCurrentUser(data.user);
           setLoggedIn(true);
+        });
+      } else {
+        res.json().then((data) => {
+          setErrors(data.errors);
+        });
+      }
+    });
+  }, [token]);
+
+  // gets all users
+  useEffect(() => {
+    fetch("http://localhost:3000/users", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setAllUsers(data);
         });
       } else {
         res.json().then((data) => {
@@ -93,7 +114,10 @@ function App() {
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>
           <Route path="/me" element={<Profile user={currentUser} />} />
-          <Route path="/chat" element={<Chat user={currentUser} />} />
+          <Route
+            path="/chat"
+            element={<Messages user={currentUser} allUsers={allUsers} />}
+          />
           <Route path="/friends" element={<Friends user={currentUser} />} />
           <Route path="/" element={<Feed user={currentUser} />} />
         </Routes>
