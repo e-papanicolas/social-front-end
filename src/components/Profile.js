@@ -22,7 +22,7 @@ function Profile({ user }) {
   const day = user.created_at.slice(8, 10);
 
   return (
-    <div className="bg-yellow-100 min-h-screen min-w-screen">
+    <div className="bg-yellow-100 min-h-screen min-w-screen p-72">
       <p>profile page</p>
       <div>
         <img src="" alt="" />
