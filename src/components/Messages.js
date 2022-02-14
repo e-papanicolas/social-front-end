@@ -29,8 +29,6 @@ function Messages({ allUsers }) {
     }
   }
 
-  console.log(user);
-
   function handleNewMessage() {
     setPopup(true);
   }
