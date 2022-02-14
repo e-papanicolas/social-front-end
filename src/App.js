@@ -96,7 +96,6 @@ function App() {
         res.json().then((data) => {
           const updatedPosts = [...currentUser.posts, data]
           setCurrentUser({...currentUser, posts: updatedPosts});
-          setPosts([{content: data.content, created_at: data.created_at, user: currentUser}, ...posts]);
         });
       } else {
         res.json().then((data) => {
@@ -145,7 +144,7 @@ function App() {
           <Route path="/me" element={<Profile user={currentUser} />} />
           <Route path="/chat" element={<Chat user={currentUser} />} />
           <Route path="/friends" element={<Friends user={currentUser} />} />
-          <Route path="/" element={<Feed posts={posts} handleAddPost={handleAddPost}/>} />
+          <Route path="/" element={<Feed user={currentUser} posts={posts} handleAddPost={handleAddPost}/>} />
         </Routes>
       </UserContext.Provider>
     </div>

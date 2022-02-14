@@ -1,13 +1,15 @@
 import "../index.css";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../App"
+//import { UserContext } from "../App"
 
-function Feed({ posts, handleAddPost }) {
-  const user = useContext(UserContext);
+function Feed({  user, posts, handleAddPost }) {
+  //const user = useContext(UserContext);
   const [newPost, setNewPost] = useState({
     content: "",
     user_id: user.id
   });
+
+  console.log(user.id);
 
   const sortedPosts = [...posts];
   sortedPosts.sort(function(a,b){
@@ -15,7 +17,7 @@ function Feed({ posts, handleAddPost }) {
   });
 
   function handleFormChange(e) {
-    setNewPost({[e.target.name]: e.target.value});
+    setNewPost({...newPost, [e.target.name]: e.target.value});
   }
 
 
