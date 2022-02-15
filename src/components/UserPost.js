@@ -1,9 +1,9 @@
 import React from "react";
-import { CreatedDate } from "./Tool Components/CreatedDate";
+import { CreatedDate } from "./ToolComponents/CreatedDate";
 
 const UserPost = ({ post }) => {
   return (
-    <div className="flex flex-col m-2">
+    <div className="ml-2 w-11/12 flex flex-col p-1 rounded-md ring-2 ring-gray-300 my-2 bg-amber-200 group">
       <div className="flex items-end">
         <img
           src={post.user.avatar}
@@ -16,7 +16,7 @@ const UserPost = ({ post }) => {
         <p>{post.content}</p>
       </div>
       <div>
-        <small>Likes: 0</small>
+        <small>Likes: 0 (not implemented yet)</small>
       </div>
     </div>
   );
