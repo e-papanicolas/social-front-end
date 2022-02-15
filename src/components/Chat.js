@@ -1,6 +1,7 @@
 import { UserContext } from "../App";
 import { useContext, useState, useEffect } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
+import ChatMessage from "./ChatMessage";
 
 function Chat({ friend, messages, setMessages, chatID }) {
   const user = useContext(UserContext);
@@ -25,7 +26,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
   const newMessageObj = {
     message: {
       user_id: user.id,
-      chat_id: 1,
+      chat_id: chatID,
       content: newMsg,
     },
   };
@@ -39,16 +40,29 @@ function Chat({ friend, messages, setMessages, chatID }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newMessageObj),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setMessages([...messages, data]);
-        // console.log(data);
-      });
+    });
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   setMessages([...messages, data]);
+    //   console.log(data);
+    // });
+  }
+
+  function handleRecieveData(data) {
+    console.log(data);
+    // if (data.messages) {
+    //   setMessages(data.messages);
+    // }
+    // if (data.chat_id === chatID) {
+    //   return <ChatMessage key={data.id} data={data} />;
+    // }
   }
 
   return (
-    <ActionCableConsumer channel={channelObject} onReceived={console.log}>
+    <ActionCableConsumer
+      channel={channelObject}
+      onReceived={(data) => handleRecieveData(data)}
+    >
       <p>User:</p>
       <p>{user.username}</p>
       <p>Friend:</p>
@@ -57,12 +71,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
       <div>
         {messages
           ? messages.map((msg) => {
-              return (
-                <div key={msg.id}>
-                  <p>{msg.content}</p>
-                  <p>{msg.user_id}</p>
-                </div>
-              );
+              return <ChatMessage key={msg.id} data={msg} />;
             })
           : null}
       </div>

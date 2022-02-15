@@ -38,7 +38,7 @@ function Messages({ allUsers }) {
   function handleStartNewChat(new_user) {
     setCurrentChat(true);
     setPopup(!popup);
-    setChatFriend(user);
+    setChatFriend(new_user);
 
     fetch(`http://localhost:3000/chats`, {
       method: "POST",
