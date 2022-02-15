@@ -83,7 +83,6 @@ function App() {
 
   function handleAddPost(newPost, e) {
     e.preventDefault();
-    console.log(newPost);
 
     fetch("http://localhost:3000/posts", {
       method: "POST",
@@ -125,32 +124,24 @@ function App() {
     });
   }, [token]);
 
-
   function handleAddFriend(friendId) {
-    console.log("adding friend: ", friendId);
-    console.log("adding friend to: ", currentUser.id);
     const updatedFriends = [...currentUser.friends, friendId];
-    console.log(updatedFriends);
+
     const updatedUser = {
       ...currentUser,
-      friends: updatedFriends
-    }
-    console.log(updatedUser);
-    fetch(`/add_friend/${currentUser.id}`, {
+      friends: updatedFriends,
+    };
+    fetch(`http://localhost:3000/add_friend/${currentUser.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json", 
-        Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({user: {updatedUser}})
+      body: JSON.stringify({ user: { updatedUser } }),
     })
-    .then(resp => resp.json()) 
-    .then(user => setCurrentUser(user))
+      .then((resp) => resp.json())
+      .then((user) => setCurrentUser(user));
   }
-
-  console.log(currentUser);
-
-  console.log("in app, all users: ", allUsers);
 
   if (currentUser.name === "") {
     return <p>LOADING...</p>;
@@ -192,7 +183,16 @@ function App() {
             path="/chat"
             element={<Messages user={currentUser} allUsers={allUsers} />}
           />
-          <Route path="/friends" element={<Friends user={currentUser} allUsers={allUsers} handleAddFriend={handleAddFriend}/>} />
+          <Route
+            path="/friends"
+            element={
+              <Friends
+                user={currentUser}
+                allUsers={allUsers}
+                handleAddFriend={handleAddFriend}
+              />
+            }
+          />
           <Route
             path="/"
             element={

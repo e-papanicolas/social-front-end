@@ -11,8 +11,6 @@ function Feed({ user, posts, handleAddPost }) {
     user_id: user.id,
   });
 
-  console.log(user.id);
-
   const sortedPosts = [...posts];
   sortedPosts.sort(function (a, b) {
     return new Date(b.created_at) - new Date(a.created_at);
