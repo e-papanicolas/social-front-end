@@ -1,6 +1,7 @@
 import { UserContext } from "../App";
 import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
+import { ActionCableProvider } from "react-actioncable-provider";
 
 function Messages({ allUsers }) {
   const user = useContext(UserContext);
@@ -11,6 +12,8 @@ function Messages({ allUsers }) {
   const [popup, setPopup] = useState(false);
   const [currentChat, setCurrentChat] = useState(false);
   const [chatFriend, setChatFriend] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [chatID, setChatID] = useState(null);
 
   function handleUserSearch(e) {
     setUserSearch(e.target.value);
@@ -32,10 +35,29 @@ function Messages({ allUsers }) {
     setPopup(true);
   }
 
-  function handleStartNewChat(user) {
+  function handleStartNewChat(new_user) {
     setCurrentChat(true);
     setPopup(!popup);
     setChatFriend(user);
+
+    fetch(`http://localhost:3000/chats`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat: {
+          name: `chat ${user.username} and ${new_user.username}`,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessages(data.chat_messages);
+        setChatID(data.id);
+        console.log(data);
+      });
   }
 
   if (popup) {
@@ -95,7 +117,14 @@ function Messages({ allUsers }) {
       </div>
       <div>
         {currentChat ? (
-          <Chat friend={chatFriend} />
+          <ActionCableProvider url="ws://localhost:3000/cable">
+            <Chat
+              friend={chatFriend}
+              messages={messages}
+              setMessages={setMessages}
+              chatID={chatID}
+            />
+          </ActionCableProvider>
         ) : (
           "You have no chats right now"
         )}
