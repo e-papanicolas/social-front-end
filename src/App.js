@@ -20,7 +20,7 @@ function App() {
   const [errors, setErrors] = useState([]);
 
   const [posts, setPosts] = useState([]);
- 
+
   const [allUsers, setAllUsers] = useState([]);
 
   console.log(allUsers);
@@ -81,7 +81,6 @@ function App() {
         });
       }
     });
-
   }, [token]);
 
   function handleAddPost(newPost, e) {
@@ -94,12 +93,12 @@ function App() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(newPost)
+      body: JSON.stringify(newPost),
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          const updatedPosts = [...currentUser.posts, data]
-          setCurrentUser({...currentUser, posts: updatedPosts});
+          const updatedPosts = [...currentUser.posts, data];
+          setCurrentUser({ ...currentUser, posts: updatedPosts });
         });
       } else {
         res.json().then((data) => {
@@ -160,13 +159,25 @@ function App() {
       <UserContext.Provider value={currentUser}>
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>
-          <Route path="/me" element={<Profile user={currentUser} />} />
+          <Route
+            path="/me"
+            element={<Profile user={currentUser} setUser={setCurrentUser} />}
+          />
           <Route
             path="/chat"
             element={<Messages user={currentUser} allUsers={allUsers} />}
           />
           <Route path="/friends" element={<Friends user={currentUser} />} />
-          <Route path="/" element={<Feed user={currentUser} posts={posts} handleAddPost={handleAddPost}/>} />
+          <Route
+            path="/"
+            element={
+              <Feed
+                user={currentUser}
+                posts={posts}
+                handleAddPost={handleAddPost}
+              />
+            }
+          />
         </Routes>
       </UserContext.Provider>
     </div>
