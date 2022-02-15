@@ -13,16 +13,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
     message: [],
   };
 
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/chats/1", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then(console.log);
-  // }, [token]);
-
   const newMessageObj = {
     message: {
       user_id: user.id,
@@ -50,13 +40,12 @@ function Chat({ friend, messages, setMessages, chatID }) {
 
   function handleRecieveData(data) {
     console.log(data);
-    // if (data.messages) {
-    //   setMessages(data.messages);
-    // }
-    // if (data.chat_id === chatID) {
-    //   return <ChatMessage key={data.id} data={data} />;
-    // }
+    if (data.content) {
+      console.log(data.content);
+      setMessages([...messages, data]);
+    }
   }
+  console.log(messages);
 
   return (
     <ActionCableConsumer

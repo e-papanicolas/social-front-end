@@ -31,6 +31,16 @@ function Messages({ allUsers }) {
     }
   }
 
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/chats/:id", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then(console.log);
+  // }, [token]);
+
   function handleNewMessage() {
     setPopup(true);
   }
@@ -121,8 +131,8 @@ function Messages({ allUsers }) {
             <Chat
               friend={chatFriend}
               messages={messages}
-              setMessages={setMessages}
               chatID={chatID}
+              setMessages={setMessages}
             />
           </ActionCableProvider>
         ) : (
