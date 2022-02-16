@@ -39,31 +39,32 @@ function Chat({ friend, messages, setMessages, chatID }) {
   }
 
   function handleRecieveData(data) {
-    console.log(data);
+    // console.log(data);
     if (data.content) {
-      console.log(data.content);
+      // console.log(data.content);
       setMessages([...messages, data]);
     }
   }
-  console.log(messages);
 
   return (
-    <ActionCableConsumer
-      channel={channelObject}
-      onReceived={(data) => handleRecieveData(data)}
-    >
-      <p>User:</p>
-      <p>{user.username}</p>
-      <p>Friend:</p>
-      <p>{friend.username}</p>
+    <>
+      <ActionCableConsumer
+        channel={channelObject}
+        onReceived={(data) => handleRecieveData(data)}
+      >
+        <p>User:</p>
+        <p>{user.username}</p>
+        <p>Friend:</p>
+        <p>{friend.username}</p>
 
-      <div>
-        {messages
-          ? messages.map((msg) => {
-              return <ChatMessage key={msg.id} data={msg} />;
-            })
-          : null}
-      </div>
+        <div>
+          {messages
+            ? messages.map((msg) => {
+                return <ChatMessage key={msg.id} data={msg} />;
+              })
+            : null}
+        </div>
+      </ActionCableConsumer>
       <div>
         <form onSubmit={handleSendMessage}>
           <input
@@ -72,13 +73,13 @@ function Chat({ friend, messages, setMessages, chatID }) {
             value={newMsg}
             onChange={(e) => {
               setNewMsg(e.target.value);
-              console.log(e.target.value);
+              // console.log(e.target.value);
             }}
           ></input>
           <button type="submit">SEND</button>
         </form>
       </div>
-    </ActionCableConsumer>
+    </>
   );
 }
 

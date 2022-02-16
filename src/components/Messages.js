@@ -118,7 +118,7 @@ function Messages({ allUsers }) {
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
-            placeholder="search for people"
+            placeholder="search chats"
             value={messageSearch}
             onChange={(e) => setMessageSearch(e.target.value)}
           ></input>
@@ -135,9 +135,7 @@ function Messages({ allUsers }) {
               setMessages={setMessages}
             />
           </ActionCableProvider>
-        ) : (
-          "You have no chats right now"
-        )}
+        ) : null}
       </div>
     </div>
   );
