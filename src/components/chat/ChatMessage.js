@@ -1,7 +1,10 @@
 import React from "react";
 import { format } from "date-fns";
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 export default function ChatMessage({ data }) {
+  const user = useContext(UserContext);
   console.log(data);
   // const formatDate = (data) => {
   //   const timestamp = data.created_at;
@@ -11,11 +14,21 @@ export default function ChatMessage({ data }) {
   //   format(new Date());
   // };
   // formatDate();
-  return (
-    <div key={data.user_id}>
-      <p>{data.content}</p>
-      <p>{data.user_id}</p>
-      <p>{data.created_at}</p>
-    </div>
-  );
+  if (data.user_id === user.id) {
+    return (
+      <div key={data.user_id} className="bg-sky-500">
+        <p>{data.content}</p>
+        <p>{data.user_id}</p>
+        <p>{data.created_at}</p>
+      </div>
+    );
+  } else {
+    return (
+      <div key={data.user_id} className="bg-white">
+        <p>{data.content}</p>
+        <p>{data.user_id}</p>
+        <p>{data.created_at}</p>
+      </div>
+    );
+  }
 }
