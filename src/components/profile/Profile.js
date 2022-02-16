@@ -109,7 +109,7 @@ function Profile({ user, setUser }) {
         <div className="mt-28 h-full w-full ">
           <h3 className="ml-2 mt-5 font-bold">Your post history</h3>
           <span className="w-full h-80 flex flex-col items-start overflow-y-scroll">
-            {user.posts === 0 ? (
+            {user.posts.length === 0 ? (
               <p>It's quiet in here. Post something!</p>
             ) : (
               user.posts.map((post) => {

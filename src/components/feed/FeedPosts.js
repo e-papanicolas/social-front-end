@@ -2,24 +2,23 @@ import React, { useState } from "react";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { NumberWithCommas } from "../ToolComponents/NumberWithCommas";
 
-
 const FeedPosts = ({ post }) => {
   const token = localStorage.getItem("jwt");
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(post.likes);
 
   function handleNewLike() {
     fetch(`http://localhost:3000/posts/${post.id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({likes: likes + 1})
+      body: JSON.stringify({ likes: likes + 1 }),
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
           setLikes(likes + 1);
-          console.log(data)
+          console.log(data);
         });
       } else {
         res.json().then((data) => {
@@ -28,10 +27,6 @@ const FeedPosts = ({ post }) => {
       }
     });
   }
-
-
-
-
 
   return (
     <div
