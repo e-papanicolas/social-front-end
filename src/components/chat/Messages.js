@@ -1,4 +1,4 @@
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
 import { ActionCableProvider } from "react-actioncable-provider";

@@ -1,5 +1,5 @@
 import React from "react";
-import { CreatedDate } from "./ToolComponents/CreatedDate";
+import { CreatedDate } from "../ToolComponents/CreatedDate";
 
 const UserPost = ({ post }) => {
   return (

@@ -1,13 +1,13 @@
 import { useState, useEffect, createContext } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Feed from "./components/Feed";
-import NavBar from "./components/NavBar";
-import Profile from "./components/Profile";
-import Messages from "./components/Messages";
-import Friends from "./components/Friends";
+import Login from "./components/login/Login";
+import SignUp from "./components/login/SignUp";
+import Feed from "./components/feed/Feed";
+import NavBar from "./components/navBar/NavBar";
+import Profile from "./components/profile/Profile";
+import Messages from "./components/chat/Messages";
+import Friends from "./components/friends/Friends";
 
 import "./index.css";
 export const UserContext = createContext();
@@ -18,6 +18,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [friendsList, setFriendsList] = useState([]);
 
   const [posts, setPosts] = useState([]);
 
@@ -56,13 +57,14 @@ function App() {
         res.json().then((data) => {
           setCurrentUser(data.user);
           setLoggedIn(true);
+          setFriendsList(data.user.friends);
         });
       } else {
         res.json().then((data) => {
           setErrors(data.errors);
         });
       }
-    });
+    }, []);
 
     fetch("http://localhost:3000/posts", {
       headers: {
@@ -126,21 +128,22 @@ function App() {
 
   function handleAddFriend(friendId) {
     const updatedFriends = [...currentUser.friends, friendId];
+    currentUser.friends = updatedFriends;
 
-    const updatedUser = {
-      ...currentUser,
-      friends: updatedFriends,
-    };
     fetch(`http://localhost:3000/add_friend/${currentUser.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ user: { updatedUser } }),
+      body: JSON.stringify({ friends: currentUser.friends }),
     })
       .then((resp) => resp.json())
-      .then((user) => setCurrentUser(user));
+      .then((friends) => {
+        currentUser.friends = friends;
+        setCurrentUser(currentUser);
+        setFriendsList(friends);
+      });
   }
 
   if (currentUser.name === "") {
@@ -190,6 +193,7 @@ function App() {
                 user={currentUser}
                 allUsers={allUsers}
                 handleAddFriend={handleAddFriend}
+                friendsList={friendsList}
               />
             }
           />
