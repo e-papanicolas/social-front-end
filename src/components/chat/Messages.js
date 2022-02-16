@@ -15,7 +15,19 @@ function Messages({ allUsers }) {
   const [messages, setMessages] = useState([]);
   const [chatID, setChatID] = useState(null);
 
-  console.log(chatID);
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/chats`, {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
+  // }, [token, user]);
 
   function handleUserSearch(e) {
     setUserSearch(e.target.value);
@@ -32,16 +44,6 @@ function Messages({ allUsers }) {
       setUserDisplay([]);
     }
   }
-
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/chats/:id", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then(console.log);
-  // }, [token]);
 
   function handleNewMessage() {
     setPopup(true);
