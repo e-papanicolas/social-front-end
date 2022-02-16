@@ -76,10 +76,16 @@ function Messages({ allUsers }) {
 
   if (popup) {
     return (
-      <div className="bg-yellow-100 min-h-screen p-72 grid grid-cols-2">
-        <h1 className="font-bold text-xl">New message</h1>
+      <div className="bg-white p-3 m-15 flex justify-center">
+        <div>
+          <h1 className="font-bold text-xl">New message</h1>
+          <h1 onClick={() => setPopup(!popup)} className="">
+            X
+          </h1>
+        </div>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
+            className="p-2 m-3"
             type="text"
             placeholder="search for people"
             value={userSearch}
@@ -109,7 +115,9 @@ function Messages({ allUsers }) {
             );
           })}
         </div>
-        <h1 onClick={() => setPopup(!popup)}>X</h1>
+        {/* <h1 onClick={() => setPopup(!popup)} className="p-2 m-3">
+          X
+        </h1> */}
       </div>
     );
   }

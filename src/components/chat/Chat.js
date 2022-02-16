@@ -66,6 +66,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
       <div>
         <form onSubmit={handleSendMessage}>
           <input
+            className="m-3 p-2 w-4/6 rounded-md"
             type="textarea"
             placeholder="start typing a message"
             value={newMsg}
@@ -73,7 +74,12 @@ function Chat({ friend, messages, setMessages, chatID }) {
               setNewMsg(e.target.value);
             }}
           ></input>
-          <button type="submit">SEND</button>
+          <button
+            type="submit"
+            className="w-1/6 bg-white m-3 p-2 rounded-md text-sky-500"
+          >
+            SEND
+          </button>
         </form>
       </div>
     </>
