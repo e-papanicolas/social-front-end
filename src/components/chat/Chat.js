@@ -10,15 +10,13 @@ function Chat({ friend, messages, setMessages, chatID }) {
 
   const channelObject = {
     channel: "ChatChannel",
-    message: [],
+    chat_id: chatID,
   };
 
   const newMessageObj = {
-    message: {
-      user_id: user.id,
-      chat_id: chatID,
-      content: newMsg,
-    },
+    user_id: user.id,
+    chat_id: chatID,
+    content: newMsg,
   };
 
   function handleSendMessage(e) {
@@ -30,7 +28,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newMessageObj),
-    });
+    }).then(() => setNewMsg(""));
     // .then((res) => res.json())
     // .then((data) => {
     //   setMessages([...messages, data]);
@@ -39,9 +37,9 @@ function Chat({ friend, messages, setMessages, chatID }) {
   }
 
   function handleRecieveData(data) {
-    // console.log(data);
+    console.log(data);
     if (data.content) {
-      // console.log(data.content);
+      console.log(data.content);
       setMessages([...messages, data]);
     }
   }
@@ -73,7 +71,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
             value={newMsg}
             onChange={(e) => {
               setNewMsg(e.target.value);
-              // console.log(e.target.value);
             }}
           ></input>
           <button type="submit">SEND</button>

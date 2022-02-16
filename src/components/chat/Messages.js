@@ -15,6 +15,8 @@ function Messages({ allUsers }) {
   const [messages, setMessages] = useState([]);
   const [chatID, setChatID] = useState(null);
 
+  console.log(chatID);
+
   function handleUserSearch(e) {
     setUserSearch(e.target.value);
     const results = allUsers.filter((user) => {
@@ -57,9 +59,9 @@ function Messages({ allUsers }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        chat: {
-          name: `chat ${user.username} and ${new_user.username}`,
-        },
+        name: `chat test`,
+        sender_id: user.id,
+        recipient_id: new_user.id,
       }),
     })
       .then((res) => res.json())
