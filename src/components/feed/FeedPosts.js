@@ -2,8 +2,36 @@ import React, { useState } from "react";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { NumberWithCommas } from "../ToolComponents/NumberWithCommas";
 
+
 const FeedPosts = ({ post }) => {
+  const token = localStorage.getItem("jwt");
   const [likes, setLikes] = useState(0);
+
+  function handleNewLike() {
+    fetch(`http://localhost:3000/posts/${post.id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({likes: likes + 1})
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setLikes(likes + 1);
+          console.log(data)
+        });
+      } else {
+        res.json().then((data) => {
+          console.log(data.errors);
+        });
+      }
+    });
+  }
+
+
+
+
 
   return (
     <div
@@ -24,9 +52,7 @@ const FeedPosts = ({ post }) => {
       <p className="px-3">{post.content}</p>
       <small className="ml-3">Likes: {NumberWithCommas(likes)}</small>
       <button
-        onClick={() => {
-          setLikes(likes + 1);
-        }}
+        onClick={handleNewLike}
         className="max-w-fit px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400 hover:bg-gray-600 hidden group-hover:block"
       >
         Like

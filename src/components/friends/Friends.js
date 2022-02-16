@@ -70,7 +70,7 @@ function Friends({ user, allUsers, handleAddFriend, friendsList }) {
                   className=" p-0.5 m-2 text-gray-700 bg-gray-400 text-xs rounded hover:bg-gray-500"
                   onClick={() => handleAddFriend(friend.id)}
                 >
-                  Add Friend
+                  Follow
                 </button>
               </li>
             );

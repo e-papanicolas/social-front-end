@@ -8,7 +8,7 @@ function NavBar({ user, handleLogOut }) {
 
   return (
     <div
-      className="w-40 h-full shadow-md bg-gray-300 fixed z-10"
+      className="w-60 h-full shadow-md bg-gray-300 fixed z-10"
       id="sidenavSecExample"
     >
       <div className="pt-4 pb-2 px-6">

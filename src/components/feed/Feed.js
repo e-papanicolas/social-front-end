@@ -49,13 +49,13 @@ function Feed({ user, posts, handleAddPost }) {
           <button className="ml-5 mb-5 px-1.5 bg-gray-200 text-gray-700 border border-amber-600 rounded hover:bg-gray-300">
             Share My Post
           </button>
-          <button
+          {/* <button
             type="submit"
             className="ml-5 mb-5 px-1.5 bg-gray-200 text-gray-700 border border-amber-600 rounded hover:bg-gray-300"
             onClick={null}
           >
             Add a Picture
-          </button>
+          </button> */}
         </div>
       </form>
 
