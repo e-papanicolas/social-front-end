@@ -1,4 +1,4 @@
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 import { useContext, useState, useEffect } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import ChatMessage from "./ChatMessage";

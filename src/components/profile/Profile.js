@@ -1,6 +1,6 @@
-import "../index.css";
+import "../../index.css";
 import UserPost from "./UserPost";
-import { CreatedDate } from "./ToolComponents/CreatedDate";
+import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { useState } from "react";
 
 function Profile({ user, setUser }) {
@@ -18,7 +18,6 @@ function Profile({ user, setUser }) {
   };
 
   const submitBioEdit = () => {
-    console.log(bioInput);
     fetch(`http://localhost:3000/update_bio/${user.id}`, {
       method: "PATCH",
       headers: {
@@ -33,7 +32,6 @@ function Profile({ user, setUser }) {
       .then((res) => res.json())
       .then((updatedUser) => {
         setUser(updatedUser.user);
-        console.log(updatedUser.user);
         setEditProfile(false);
       });
   };
@@ -115,7 +113,7 @@ function Profile({ user, setUser }) {
               <p>It's quiet in here. Post something!</p>
             ) : (
               user.posts.map((post) => {
-                return <UserPost post={post} />;
+                return <UserPost post={post} key={post.id} />;
               })
             )}
           </span>

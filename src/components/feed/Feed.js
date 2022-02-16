@@ -1,17 +1,27 @@
-import "../index.css";
-import { useContext, useEffect, useState } from "react";
-import { CreatedDate } from "./ToolComponents/CreatedDate";
-
-//import { UserContext } from "../App"
+import "../../index.css";
+import { useState } from "react";
+import FeedPosts from "./FeedPosts";
 
 function Feed({ user, posts, handleAddPost }) {
-  //const user = useContext(UserContext);
+  const [filterFriends, setFilterFriends] = useState(true);
   const [newPost, setNewPost] = useState({
     content: "",
     user_id: user.id,
   });
 
-  const sortedPosts = [...posts];
+  let friendsPostsArray = [];
+  //Filters posts by friends
+  const friendsPosts = user.friends.map((friend) =>
+    posts.filter((post) => friend.id === post.user.id)
+  );
+
+  //Takes each friend and pushes post into empty array
+  friendsPosts.map((user) => {
+    return user.map((posts) => friendsPostsArray.push(posts));
+  });
+
+  // const sortedPosts = [...posts];
+  const sortedPosts = filterFriends ? [...friendsPostsArray] : [...posts];
   sortedPosts.sort(function (a, b) {
     return new Date(b.created_at) - new Date(a.created_at);
   });
@@ -49,32 +59,33 @@ function Feed({ user, posts, handleAddPost }) {
         </div>
       </form>
 
-      {sortedPosts.map((post) => {
-        return (
-          <div
-            key={post.content}
-            className="flex flex-col mr-20 rounded-md ring-2 ring-gray-300 my-2 bg-amber-200 group"
-          >
-            <div className="flex flex-row">
-              <img
-                src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
-                className="rounded-full w-10 p-2"
-                alt="Avatar"
-              />
-              <p className="max-w-fit my-1 p-1 rounded-lg font-semibold">
-                {post.user.username}
-              </p>
-              <small className="self-center">{CreatedDate(post)}</small>
-            </div>
-            <p className="px-3">{post.content}</p>
-            <button className="max-w-fit px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400 hover:bg-gray-600 hidden group-hover:block">
-              Like
-            </button>
-          </div>
-        );
-      })}
+      <div className="w-full text-center">
+        <span
+          className="mx-20 cursor-pointer"
+          onClick={() => {
+            setFilterFriends(true);
+          }}
+        >
+          Friends Posts
+        </span>
+        <span
+          className="mx-20 cursor-pointer"
+          onClick={() => {
+            setFilterFriends(false);
+          }}
+        >
+          Discover more
+        </span>
+      </div>
+
+      {sortedPosts.length > 0 ? (
+        sortedPosts.map((post) => {
+          return <FeedPosts post={post} />;
+        })
+      ) : (
+        <p>Add more friends to see what they're up to!</p>
+      )}
     </div>
   );
 }
-
 export default Feed;
