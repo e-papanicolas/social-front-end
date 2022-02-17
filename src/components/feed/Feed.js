@@ -91,7 +91,7 @@ function Feed({ user, posts, handleAddPost }) {
 
       {sortedPosts.length > 0 ? (
         sortedPosts.map((post) => {
-          return <FeedPosts post={post} />;
+          return <FeedPosts post={post} key={post.id} />;
         })
       ) : (
         <p>Add more friends to see what they're up to!</p>

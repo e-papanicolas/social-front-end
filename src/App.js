@@ -19,9 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [errors, setErrors] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
-
   const [posts, setPosts] = useState([]);
-
   const [allUsers, setAllUsers] = useState([]);
 
   function handleLogin(user) {
@@ -29,16 +27,6 @@ function App() {
     setLoggedIn(true);
     navigate("/");
   }
-
-  // function handleLogOut() {
-  //   fetch("http://localhost:3000/logout", {
-  //     method: "DELETE",
-  //   }).then(() => {
-  //     navigate("/login");
-  //     setLoggedIn(false);
-  //     localStorage.clear();
-  //   });
-  // }
 
   function handleLogOut() {
     setLoggedIn(false);
@@ -146,7 +134,6 @@ function App() {
       });
   }
 
-
   if (currentUser.name === "") {
     return <p>LOADING...</p>;
   }
@@ -164,7 +151,6 @@ function App() {
               />
             }
           />
-
           <Route exact path="/" element={<Login onLogin={handleLogin} />} />
 
           {errors ? errors.map((e) => <div>{e}</div>) : null}
@@ -178,19 +164,12 @@ function App() {
       <UserContext.Provider value={currentUser}>
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>
-          <Route
-            path="/me"
-            element={<Profile user={currentUser} setUser={setCurrentUser} />}
-          />
-          <Route
-            path="/chat"
-            element={<Messages user={currentUser} allUsers={allUsers} />}
-          />
+          <Route path="/me" element={<Profile setUser={setCurrentUser} />} />
+          <Route path="/chat" element={<Messages allUsers={allUsers} />} />
           <Route
             path="/friends"
             element={
               <Friends
-                user={currentUser}
                 allUsers={allUsers}
                 handleAddFriend={handleAddFriend}
                 friendsList={friendsList}
@@ -199,13 +178,7 @@ function App() {
           />
           <Route
             path="/"
-            element={
-              <Feed
-                user={currentUser}
-                posts={posts}
-                handleAddPost={handleAddPost}
-              />
-            }
+            element={<Feed posts={posts} handleAddPost={handleAddPost} />}
           />
         </Routes>
       </UserContext.Provider>

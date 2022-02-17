@@ -64,7 +64,7 @@ function Friends({ user, allUsers, handleAddFriend, friendsList }) {
       </div>
 
       <div className="flex flex-col">
-        <div classname="">
+        <div className="">
           <label className="text-2xl font-bold text-gray-700 mr-3">
             Find a friend:
           </label>

@@ -1,5 +1,5 @@
 import { UserContext } from "../../App";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import ChatMessage from "./ChatMessage";
 
@@ -7,7 +7,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
   const user = useContext(UserContext);
   const token = localStorage.getItem("jwt");
   const [newMsg, setNewMsg] = useState("");
-  const [view, setView] = useState(true);
 
   const channelObject = {
     channel: "ChatChannel",
@@ -38,7 +37,10 @@ function Chat({ friend, messages, setMessages, chatID }) {
   }
 
   function handleRecieveData(data) {
-    if (data.content) {
+    console.log(data);
+    if (data.messages) {
+      setMessages(data.messages);
+    } else if (data.content) {
       setMessages([...messages, data]);
     }
   }
@@ -47,7 +49,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
   //   setView(!view);
   // }
 
-  // if (view) {
   return (
     <>
       <ActionCableConsumer
@@ -90,9 +91,5 @@ function Chat({ friend, messages, setMessages, chatID }) {
     </>
   );
 }
-//  else {
-//   return null;
-// }
-// }
 
 export default Chat;

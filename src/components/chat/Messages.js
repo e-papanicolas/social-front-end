@@ -16,6 +16,7 @@ function Messages({ allUsers }) {
   const [messages, setMessages] = useState([]);
   const [chatID, setChatID] = useState(null);
   const [chats, setChats] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   // get all of users chats
   useEffect(() => {
@@ -31,7 +32,7 @@ function Messages({ allUsers }) {
         console.log(data);
         setChats(data);
       });
-  }, [token, user]);
+  }, [token, user, update]);
 
   // searches all users
   function handleUserSearch(e) {
@@ -48,6 +49,18 @@ function Messages({ allUsers }) {
     if (e.target.value === "") {
       setUserDisplay([]);
     }
+  }
+
+  // handles deleting a chat
+  function handleDeleteChat(chat) {
+    fetch(`http://localhost:3000/chats/${chat.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(() => {
+      setUpdate(!update);
+    });
   }
 
   // handles popup for start new chat/message
@@ -82,8 +95,6 @@ function Messages({ allUsers }) {
 
   // starts chat that already exists in preview
   function handleStartExistingChat(chat) {
-    setCurrentChat(true);
-
     fetch(`http://localhost:3000/chats`, {
       method: "POST",
       headers: {
@@ -98,23 +109,11 @@ function Messages({ allUsers }) {
     })
       .then((res) => res.json())
       .then((data) => {
+        setCurrentChat(true);
         setMessages(data.chat_messages);
         setChatID(data.id);
       });
   }
-
-  // render chat previews
-  // const chatPreviews = chats.map((chat) => {
-  //   return (
-  //     <Preview
-  //       chat={chat}
-  //       key={chat.id}
-  //       handleStartExistingChat={handleStartExistingChat}
-  //     />
-  //   );
-  // });
-
-  // renders new message modal
 
   // renders chat previews and chat screen
   return (
@@ -170,9 +169,6 @@ function Messages({ allUsers }) {
                 </button>
               </div>
             </div>
-            {/* <h1 onClick={() => setPopup(!popup)} className="p-2 m-3">
-        X
-      </h1> */}
           </div>
         </div>
       ) : null}
@@ -195,6 +191,7 @@ function Messages({ allUsers }) {
                   <Preview
                     chat={chat}
                     key={chat.id}
+                    handleDeleteChat={handleDeleteChat}
                     handleStartExistingChat={handleStartExistingChat}
                   />
                 );
