@@ -63,7 +63,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
             : null}
         </div>
       </ActionCableConsumer>
-      <div>
+      <div className="absolute bottom-0 right-0 w-2/5">
         <form onSubmit={handleSendMessage}>
           <input
             className="m-3 p-2 w-4/6 rounded-md"
