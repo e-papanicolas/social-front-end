@@ -2,19 +2,20 @@ import React from "react";
 import { UserContext } from "../../App";
 import { useContext, useState } from "react";
 
-export default function Preview({ chat }) {
+export default function Preview({ chat, handleStartExistingChat }) {
   const user = useContext(UserContext);
 
   console.log(chat);
-  const sender = chat.chatters.find((c) => c.sender_id !== user.id);
+
   const date = new Date(chat.updated_at).toString();
 
   return (
-    <div>
-      <div>{sender[0].avatar}</div>
+    <div onClick={() => handleStartExistingChat(chat)}>
+      <div>{chat.sender.avatar}</div>
       <div>
         <p>
-          {sender[0].first_name} {sender[0].last_name} @{sender[0].username}
+          {chat.sender.first_name} {chat.sender.last_name} @
+          {chat.sender.username}
         </p>
         <p>
           {date.slice(0, 10)} {date.slice(16, 21)}

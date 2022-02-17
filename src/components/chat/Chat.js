@@ -7,6 +7,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
   const user = useContext(UserContext);
   const token = localStorage.getItem("jwt");
   const [newMsg, setNewMsg] = useState("");
+  const [view, setView] = useState(true);
 
   const channelObject = {
     channel: "ChatChannel",
@@ -42,23 +43,19 @@ function Chat({ friend, messages, setMessages, chatID }) {
     }
   }
 
+  // function closeChat() {
+  //   setView(!view);
+  // }
+
+  // if (view) {
   return (
     <>
       <ActionCableConsumer
         channel={channelObject}
         onReceived={(data) => handleRecieveData(data)}
       >
-        <div>
-          <span className="flex">
-            <p>User:</p>
-            <p>{user.username}</p>
-          </span>
-          <span className="flex">
-            <p>Friend:</p>
-            <p>{friend.username}</p>
-          </span>
-        </div>
-        <div className="h-5/6 overflow-y-scroll">
+        <div></div>
+        <div className="h-96 overflow-y-scroll">
           {messages
             ? messages.map((msg) => {
                 return <ChatMessage key={msg.id} data={msg} />;
@@ -83,10 +80,20 @@ function Chat({ friend, messages, setMessages, chatID }) {
           >
             SEND
           </button>
+          <button
+            className="w-1/6 bg-white m-3 p-2 rounded-md text-sky-500"
+            // onClick={closeChat}
+          >
+            X
+          </button>
         </form>
       </div>
     </>
   );
 }
+//  else {
+//   return null;
+// }
+// }
 
 export default Chat;
