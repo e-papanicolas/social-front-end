@@ -8,6 +8,7 @@ function Feed({ user, posts, handleAddPost }) {
     content: "",
     user_id: user.id,
   });
+  const [category, setCategory] = useState("friends");
 
   let friendsPostsArray = [];
   //Filters posts by friends
@@ -30,8 +31,12 @@ function Feed({ user, posts, handleAddPost }) {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
   }
 
+  const categorySelector = (category) => {
+    setCategory(category);
+  };
+
   return (
-    <div className="bg-yellow-100 min-h-screen flex flex-col pl-72 pt-10">
+    <div className="min-h-screen flex flex-col pl-72 pt-10">
       <div id="welcome">
         <h1 className="text-xl font-bold mb-2">WELCOME {user.first_name}</h1>
       </div>
@@ -42,11 +47,11 @@ function Feed({ user, posts, handleAddPost }) {
         <textarea
           name="content"
           placeholder="What's on your mind?"
-          className="w-full px-1.5 ml-5 mb-2 form-control block text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding border border-solid border-amber-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-100 focus:outline-none"
+          className="w-full px-1.5 ml-5 mb-2 form-control block text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding border border-solid border-sky-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-100 focus:outline-none"
           onChange={handleFormChange}
         ></textarea>
         <div className="flex">
-          <button className="ml-5 mb-5 px-1.5 bg-gray-200 text-gray-700 border border-amber-600 rounded hover:bg-gray-300">
+          <button className="ml-5 mb-5 px-1.5 py-1 px-3 bg-sky-400 text-white rounded-full hover:bg-sky-600 text-white">
             Share My Post
           </button>
           {/* <button
@@ -59,19 +64,25 @@ function Feed({ user, posts, handleAddPost }) {
         </div>
       </form>
 
-      <div className="w-full text-center">
+      <div className="w-full text-center border-t-[1px] mb-2 pt-4">
         <span
-          className="mx-20 cursor-pointer"
+          className={`mx-20 cursor-pointer p-2 rounded-md ${
+            category === "friends" ? "bg-sky-400 text-white" : ""
+          }`}
           onClick={() => {
             setFilterFriends(true);
+            categorySelector("friends");
           }}
         >
           Friends Posts
         </span>
         <span
-          className="mx-20 cursor-pointer"
+          className={`mx-20 cursor-pointer p-2 rounded-md ${
+            category === "discover" ? "bg-sky-400 text-white" : ""
+          }`}
           onClick={() => {
             setFilterFriends(false);
+            categorySelector("discover");
           }}
         >
           Discover more

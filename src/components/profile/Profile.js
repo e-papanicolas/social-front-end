@@ -58,13 +58,10 @@ function Profile({ user, setUser }) {
       console.log("type in confirmation first");
     }
   };
-
-  console.log(confirmDelete);
-
   return (
-    <div className="bg-yellow-100 min-h-screen min-w-screen pt-40 flex justify-center ">
+    <div className="min-h-screen min-w-screen pt-40 flex justify-center ">
       <div className="ml-10 flex flex-col items-center">
-        <div className="absolute top-0 h-60 -z-1 w-full bg-white flex justify-center items-center">
+        <div className="absolute top-0 h-60 -z-1 w-full bg-slate-400 flex justify-center items-center">
           <p>banner?</p>
         </div>
         <span className="w-64 h-64 flex flex-col items-center">
@@ -86,9 +83,9 @@ function Profile({ user, setUser }) {
           <div id="welcome">
             <p>Joined {CreatedDate(user)}</p>
           </div>
-          <div className="flex">
+          <div className="flex justify-center mt-5">
             <button
-              className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400"
+              className="mb-5 px-1.5 p-1 bg-sky-500 text-white rounded-full hover:bg-sky-600 text-white"
               onClick={() => {
                 editProfile === true
                   ? submitBioEdit()
@@ -99,7 +96,7 @@ function Profile({ user, setUser }) {
             </button>
             {editProfile === true ? (
               <button
-                className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400"
+                className="ml-5 mb-5 px-1.5 p-1 bg-sky-500 text-white rounded-full hover:bg-sky-600 text-white"
                 onClick={() => {
                   setEditProfile(!editProfile);
                 }}
@@ -113,7 +110,7 @@ function Profile({ user, setUser }) {
               <textarea
                 name="bio"
                 placeholder={user.bio}
-                className="w-full h-24 px-1.5 ml-5 mb-2 form-control block text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding border border-solid border-amber-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-100 focus:outline-none"
+                className="w-full h-24 px-1.5 mb-2 form-control block text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding border border-solid border-amber-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-100 focus:outline-none"
                 onChange={bioInputHandler}
               ></textarea>
             </div>
@@ -142,7 +139,7 @@ function Profile({ user, setUser }) {
             </span>
           </div>
 
-          <div className="w-1/2 flex justify-center">
+          <div className="w-1/2 flex justify-center mt-5">
             <button
               className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-red-300 my-2 bg-red-500"
               onClick={() => setDeleteWarning(!deleteWarning)}
@@ -163,6 +160,7 @@ function Profile({ user, setUser }) {
                 <input
                   type="text"
                   name="deleteUser"
+                  className="bg-slate-200 border-[1px] border-red-500 rounded-md"
                   placeholder={user.username}
                   onChange={(e) => {
                     setConfirmDelete(e.target.value);
