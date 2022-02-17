@@ -123,7 +123,7 @@ function Messages({ allUsers }) {
   }
 
   return (
-    <div className="bg-yellow-100 min-h-screen pl-72 grid grid-cols-2">
+    <div className="bg-yellow-100 min-h-screen pl-72 grid grid-cols-2 overflow-hidden">
       <div>
         <h1 className="font-bold text-xl">Messages</h1>
         <button onClick={handleNewMessage}>+ NEWMSG</button>

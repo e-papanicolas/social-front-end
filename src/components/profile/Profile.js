@@ -2,11 +2,15 @@ import "../../index.css";
 import UserPost from "./UserPost";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ user, setUser }) {
   const [editProfile, setEditProfile] = useState(false);
   const [bioInput, setBioInput] = useState("");
+  const [deleteWarning, setDeleteWarning] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState("");
   const token = localStorage.getItem("jwt");
+  const navigate = useNavigate();
 
   //For Adding friends profile picture later
   // for (let i = 0; i < 5; i++) {
@@ -35,6 +39,27 @@ function Profile({ user, setUser }) {
         setEditProfile(false);
       });
   };
+
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    if (confirmDelete === user.username) {
+      console.log("deleted");
+
+      fetch(`http://localhost:3000/users/${user.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      localStorage.clear();
+      setUser({});
+      navigate("/");
+    } else {
+      console.log("type in confirmation first");
+    }
+  };
+
+  console.log(confirmDelete);
 
   return (
     <div className="bg-yellow-100 min-h-screen min-w-screen pt-40 flex justify-center ">
@@ -83,7 +108,6 @@ function Profile({ user, setUser }) {
               </button>
             ) : null}
           </div>
-
           {editProfile === true ? (
             <div className="w-full flex flex-col items-center justify-center">
               <textarea
@@ -104,20 +128,55 @@ function Profile({ user, setUser }) {
           ) : (
             <p>{user.bio}</p>
           )}
-        </span>
 
-        <div className="mt-28 h-full w-full ">
-          <h3 className="ml-2 mt-5 font-bold">Your post history</h3>
-          <span className="w-full h-80 flex flex-col items-start overflow-y-scroll">
-            {user.posts.length === 0 ? (
-              <p>It's quiet in here. Post something!</p>
-            ) : (
-              user.posts.map((post) => {
-                return <UserPost post={post} key={post.id} />;
-              })
-            )}
-          </span>
-        </div>
+          <div className=" h-full w-full ">
+            <h3 className="ml-2 mt-5 font-bold">Your post history</h3>
+            <span className="w-full h-40 flex flex-col items-start overflow-y-scroll">
+              {user.posts.length === 0 ? (
+                <p>It's quiet in here. Post something!</p>
+              ) : (
+                user.posts.map((post) => {
+                  return <UserPost post={post} key={post.id} />;
+                })
+              )}
+            </span>
+          </div>
+
+          <div className="w-1/2 flex justify-center">
+            <button
+              className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-red-300 my-2 bg-red-500"
+              onClick={() => setDeleteWarning(!deleteWarning)}
+            >
+              {deleteWarning ? "Cancel" : "Delete Account"}
+            </button>
+          </div>
+          {deleteWarning ? (
+            <div className="w-full">
+              <p className="text-center">
+                <strong>WARNING:</strong> You are about to delete your account.
+                This cannot be undone.
+              </p>
+              <p className="text-center">
+                Please type your username and press "I Agree" to confirm.
+              </p>
+              <form onSubmit={deleteHandler}>
+                <input
+                  type="text"
+                  name="deleteUser"
+                  placeholder={user.username}
+                  onChange={(e) => {
+                    setConfirmDelete(e.target.value);
+                  }}
+                />
+                <input
+                  type="submit"
+                  className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-red-300 my-2 bg-red-500"
+                  value="I Agree"
+                />
+              </form>
+            </div>
+          ) : null}
+        </span>
       </div>
     </div>
   );
