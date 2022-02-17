@@ -54,7 +54,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
         channel={channelObject}
         onReceived={(data) => handleRecieveData(data)}
       >
-        <div className="h-4/6 mt-3 overflow-y-scroll">
+        <div className="h-4/6 mt-10 overflow-y-scroll">
           {messages
             ? messages.map((msg) => {
                 return <ChatMessage key={msg.id} data={msg} />;
@@ -75,7 +75,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
           ></input>
           <button
             type="submit"
-            className="w-1/6 bg-white m-3 p-2 rounded-md text-white bg-sky-500"
+            className="w-1/6 bg-white m-3 p-2 rounded-md text-white bg-sky-500 "
           >
             SEND
           </button>

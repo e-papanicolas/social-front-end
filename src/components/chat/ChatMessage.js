@@ -22,7 +22,7 @@ export default function ChatMessage({ data }) {
   } else {
     return (
       <div className="w-full flex flex-col items-start">
-        <p className="bg-white rounded-tl-xl rounded-tr-xl rounded-br-xl p-3 justify-start w-1/2">
+        <p className="bg-slate-100 rounded-tl-xl rounded-tr-xl rounded-br-xl p-3 justify-start w-1/2">
           {data.content}
         </p>
         <p>
