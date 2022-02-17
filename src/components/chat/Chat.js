@@ -54,16 +54,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
         channel={channelObject}
         onReceived={(data) => handleRecieveData(data)}
       >
-        <div>
-          <span className="flex">
-            <p>User:</p>
-            <p>{user.username}</p>
-          </span>
-          <span className="flex">
-            <p>Friend:</p>
-            <p>{friend.username}</p>
-          </span>
-        </div>
         <div className="h-4/6 mt-3 overflow-y-scroll">
           {messages
             ? messages.map((msg) => {

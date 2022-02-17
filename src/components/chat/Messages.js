@@ -188,7 +188,13 @@ function Messages({ allUsers }) {
           </form>
           {chats.length > 0
             ? chats.map((chat) => {
-                return <Preview chat={chat} key={chat.id} />;
+                return (
+                  <Preview
+                    chat={chat}
+                    key={chat.id}
+                    handleStartExistingChat={handleStartExistingChat}
+                  />
+                );
               })
             : null}
         </div>
