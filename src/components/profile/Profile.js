@@ -62,7 +62,7 @@ function Profile({ user, setUser }) {
     <div className="min-h-screen min-w-screen pt-40 flex justify-center ">
       <div className="ml-10 flex flex-col items-center">
         <div className="absolute top-0 h-60 -z-1 w-full bg-slate-400 flex justify-center items-center">
-          <p>banner?</p>
+          <p className="text-white">Upload a banner here!</p>
         </div>
         <span className="w-64 h-64 flex flex-col items-center">
           <span className="z-10">

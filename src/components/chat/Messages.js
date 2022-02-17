@@ -147,20 +147,23 @@ function Messages({ allUsers }) {
                     <img
                       src={user.avatar}
                       alt={user.username}
-                      className="rounded-full shadow-lg h-10"
+                      className="rounded-full shadow-lg h-10 mr-5"
                     />
                     <div>
                       <p>
-                        {user.first_name} {user.last_name}
+                        {user.first_name[0].toUpperCase() +
+                          user.first_name.slice(1)}{" "}
+                        {user.last_name[0].toUpperCase() +
+                          user.last_name.slice(1)}
                       </p>
-                      <p>{user.username}</p>
+                      <p className="text-slate-400">{user.username}</p>
                     </div>
                   </div>
                 );
               })}
               <div className="w-full flex justify-center">
                 <button
-                  className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400"
+                  className="w-600 px-1 px-3 py-1 rounded-md ml-2 text-white my-2 bg-gray-400"
                   onClick={() => setPopup(!popup)}
                 >
                   Cancel
