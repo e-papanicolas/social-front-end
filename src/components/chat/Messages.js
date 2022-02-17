@@ -1,6 +1,7 @@
 import { UserContext } from "../../App";
 import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
+import Preview from "./Preview";
 import { ActionCableProvider } from "react-actioncable-provider";
 
 function Messages({ allUsers }) {
@@ -14,21 +15,24 @@ function Messages({ allUsers }) {
   const [chatFriend, setChatFriend] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chatID, setChatID] = useState(null);
+  const [chats, setChats] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/chats`, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // }, [token, user]);
+  // get all of users chats
+  useEffect(() => {
+    fetch(`http://localhost:3000/chats/${user.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setChats(data);
+      });
+  }, [token, user]);
 
+  // searches all users
   function handleUserSearch(e) {
     setUserSearch(e.target.value);
     const results = allUsers.filter((user) => {
@@ -45,10 +49,12 @@ function Messages({ allUsers }) {
     }
   }
 
+  // handles popup for start new chat/message
   function handleNewMessage() {
     setPopup(true);
   }
 
+  // sends request to start new chat
   function handleStartNewChat(new_user) {
     setCurrentChat(true);
     setPopup(!popup);
@@ -70,14 +76,19 @@ function Messages({ allUsers }) {
       .then((data) => {
         setMessages(data.chat_messages);
         setChatID(data.id);
-        console.log(data);
       });
   }
 
+  // render chat previews
+  const chatPreviews = chats.map((chat) => {
+    return <Preview chat={chat} key={chat.id} />;
+  });
+
+  // renders new message modal
   if (popup) {
     return (
       <div className="bg-white p-3 m-15 flex justify-center">
-        <div>
+        <div className="flex-row">
           <h1 className="font-bold text-xl">New message</h1>
           <h1 onClick={() => setPopup(!popup)} className="">
             X
@@ -122,6 +133,7 @@ function Messages({ allUsers }) {
     );
   }
 
+  // renders chat previews and chat screen
   return (
     <div className="bg-yellow-100 min-h-screen pl-72 grid grid-cols-2">
       <div>
@@ -135,7 +147,7 @@ function Messages({ allUsers }) {
             onChange={(e) => setMessageSearch(e.target.value)}
           ></input>
         </form>
-        <div>render all chats</div>
+        <div>{chatPreviews}</div>
       </div>
       <div>
         {currentChat ? (

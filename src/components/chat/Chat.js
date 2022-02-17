@@ -37,9 +37,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
   }
 
   function handleRecieveData(data) {
-    console.log(data);
     if (data.content) {
-      console.log(data.content);
       setMessages([...messages, data]);
     }
   }
