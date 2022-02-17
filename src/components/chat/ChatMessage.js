@@ -1,5 +1,4 @@
 import React from "react";
-// import { format } from "date-fns";
 import { useContext } from "react";
 import { UserContext } from "../../App";
 
@@ -13,7 +12,6 @@ export default function ChatMessage({ data }) {
         <p className="bg-sky-500 rounded-tl-xl rounded-tr-xl rounded-bl-xl p-3 justify-end w-1/2 mr-2">
           {data.content}
         </p>
-        {/* <p>{data.created_at}</p> */}
         <p className="mr-2">
           {date.slice(0, 10)} {date.slice(16, 21)}
         </p>
@@ -32,12 +30,3 @@ export default function ChatMessage({ data }) {
     );
   }
 }
-
-// const formatDate = (data) => {
-//   const timestamp = data.created_at;
-//   const date = timestamp.slice(0, 9);
-//   const time = timestamp.slice(11, 15);
-//   console.log(date, time);
-//   format(new Date());
-// };
-// formatDate();
