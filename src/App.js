@@ -174,8 +174,7 @@ function App() {
   }
 
   return (
-    <div className="">
-      <div className=""></div>
+    <div className="h-screen">
       <UserContext.Provider value={currentUser}>
         <NavBar handleLogOut={handleLogOut} user={currentUser} />
         <Routes>

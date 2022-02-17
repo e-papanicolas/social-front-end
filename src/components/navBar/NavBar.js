@@ -8,10 +8,10 @@ function NavBar({ user, handleLogOut }) {
 
   return (
     <div
-      className="w-60 h-full shadow-md bg-gray-300 fixed z-10"
+      className="w-60 h-full shadow-md bg-white border-r-[1px] border-r-sky-300 fixed z-10"
       id="sidenavSecExample"
     >
-      <div className="pt-4 pb-2 px-6">
+      <div className="pt-4 pb-5 px-6">
         <div className="grow ml-3">
           <p className="text-2xl font-semibold text-stone-700">App Name</p>
         </div>
@@ -36,50 +36,50 @@ function NavBar({ user, handleLogOut }) {
       <ul className="relative px-1 mt-5">
         <li className="relative" onClick={() => navigate("/me")}>
           <a
-            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-sky-300 transition duration-300 ease-in-out"
             href="#!"
             data-mdb-ripple="true"
-            data-mdb-ripple-color="yellow"
+            data-mdb-ripple-color="white"
           >
             <span>Profile</span>
           </a>
         </li>
         <li className="relative" onClick={() => navigate("/")}>
           <a
-            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-sky-300 transition duration-300 ease-in-out"
             href="#!"
             data-mdb-ripple="true"
-            data-mdb-ripple-color="yellow"
+            data-mdb-ripple-color="white"
           >
             <span>Newsfeed</span>
           </a>
         </li>
         <li className="relative" onClick={() => navigate("friends")}>
           <a
-            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-sky-300 transition duration-300 ease-in-out"
             href="#!"
             data-mdb-ripple="true"
-            data-mdb-ripple-color="yellow"
+            data-mdb-ripple-color="white"
           >
             <span>Friends</span>
           </a>
         </li>
         <li className="relative" onClick={() => navigate("/chat")}>
           <a
-            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-sky-300 transition duration-300 ease-in-out"
             href="#!"
             data-mdb-ripple="true"
-            data-mdb-ripple-color="yellow"
+            data-mdb-ripple-color="white"
           >
             <span>Chat</span>
           </a>
         </li>
         <li className="relative mt-5" onClick={handleLogOut}>
           <a
-            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-amber-600 hover:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center text-lg py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-white hover:bg-sky-300 transition duration-300 ease-in-out"
             href="#!"
             data-mdb-ripple="true"
-            data-mdb-ripple-color="yellow"
+            data-mdb-ripple-color="white"
           >
             <span>Logout</span>
           </a>
