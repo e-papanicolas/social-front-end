@@ -1,10 +1,12 @@
 import "../../index.css";
 import UserPost from "./UserPost";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
-function Profile({ user, setUser }) {
+function Profile({ setUser }) {
+  const user = useContext(UserContext);
   const [editProfile, setEditProfile] = useState(false);
   const [bioInput, setBioInput] = useState("");
   const [deleteWarning, setDeleteWarning] = useState(false);

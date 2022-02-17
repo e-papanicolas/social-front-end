@@ -1,8 +1,10 @@
 import "../../index.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../App";
 import FeedPosts from "./FeedPosts";
 
-function Feed({ user, posts, handleAddPost }) {
+function Feed({ posts, handleAddPost }) {
+  const user = useContext(UserContext);
   const [filterFriends, setFilterFriends] = useState(true);
   const [newPost, setNewPost] = useState({
     content: "",

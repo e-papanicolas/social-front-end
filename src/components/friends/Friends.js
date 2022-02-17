@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../App";
 import "../../index.css";
 
-function Friends({ user, allUsers, handleAddFriend, friendsList }) {
+function Friends({ allUsers, handleAddFriend, friendsList }) {
+  const user = useContext(UserContext);
   const [searchList, setSearchList] = useState([]);
 
   //Filters "People you might know" and eliminates them if they're in your friends list already

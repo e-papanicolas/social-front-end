@@ -68,8 +68,6 @@ function Login({ onLogin }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          // localStorage.token = data.jwt;
-          // localStorage.currentUser = data.user.id;
           localStorage.setItem("jwt", data.jwt);
           onLogin(data.user);
         });
@@ -101,7 +99,9 @@ function Login({ onLogin }) {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        />
+        >
+          <h1 className="text-blue-400 text-8xl">TWEETER</h1>
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
