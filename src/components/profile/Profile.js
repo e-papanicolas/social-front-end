@@ -85,7 +85,7 @@ function Profile({ user, setUser }) {
           </div>
           <div className="flex justify-center mt-5">
             <button
-              className="mb-5 px-1.5 p-1 bg-sky-500 text-white rounded-full hover:bg-sky-600 text-white"
+              className="mb-5 px-5 py-1 bg-sky-500 text-white rounded-full hover:bg-sky-600 text-white"
               onClick={() => {
                 editProfile === true
                   ? submitBioEdit()
@@ -96,7 +96,7 @@ function Profile({ user, setUser }) {
             </button>
             {editProfile === true ? (
               <button
-                className="ml-5 mb-5 px-1.5 p-1 bg-sky-500 text-white rounded-full hover:bg-sky-600 text-white"
+                className="ml-5 mb-5 px-4 py-1 bg-slate-400 text-white rounded-full hover:bg-slate-500 text-white"
                 onClick={() => {
                   setEditProfile(!editProfile);
                 }}
@@ -141,7 +141,11 @@ function Profile({ user, setUser }) {
 
           <div className="w-1/2 flex justify-center mt-5">
             <button
-              className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-red-300 my-2 bg-red-500"
+              className={`w-600 text-xs px-3 py-2 rounded-full ml-2 text-white py-1 px-3 my-2  ${
+                deleteWarning
+                  ? "bg-slate-400 hover:bg-slate-500"
+                  : "bg-red-500 hover:bg-red-700"
+              }`}
               onClick={() => setDeleteWarning(!deleteWarning)}
             >
               {deleteWarning ? "Cancel" : "Delete Account"}
@@ -168,7 +172,7 @@ function Profile({ user, setUser }) {
                 />
                 <input
                   type="submit"
-                  className="w-600 px-1 rounded-md ml-2 text-white ring-2 ring-red-300 my-2 bg-red-500"
+                  className="w-600 text-xs px-3 py-2 rounded-full ml-2 text-white py-1 px-3 my-2 bg-red-500 hover:bg-red-700"
                   value="I Agree"
                 />
               </form>

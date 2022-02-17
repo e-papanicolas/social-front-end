@@ -163,7 +163,7 @@ function Messages({ allUsers }) {
               })}
               <div className="w-full flex justify-center">
                 <button
-                  className="w-600 px-1 px-3 py-1 rounded-md ml-2 text-white my-2 bg-gray-400"
+                  className="w-600 px-1 px-3 py-1 rounded-md ml-2 text-white my-2 bg-gray-400 hover:bg-gray-500"
                   onClick={() => setPopup(!popup)}
                 >
                   Cancel
