@@ -146,6 +146,7 @@ function App() {
       });
   }
 
+
   if (currentUser.name === "") {
     return <p>LOADING...</p>;
   }
