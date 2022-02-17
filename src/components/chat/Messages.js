@@ -28,6 +28,7 @@ function Messages({ allUsers }) {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setChats(data);
       });
   }, [token, user]);
@@ -79,9 +80,38 @@ function Messages({ allUsers }) {
       });
   }
 
+  // starts chat that already exists in preview
+  function handleStartExistingChat(chat) {
+    setCurrentChat(true);
+
+    fetch(`http://localhost:3000/chats`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: `chat test`,
+        sender_id: chat.sender.id,
+        recipient_id: chat.recipient.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessages(data.chat_messages);
+        setChatID(data.id);
+      });
+  }
+
   // render chat previews
   const chatPreviews = chats.map((chat) => {
-    return <Preview chat={chat} key={chat.id} />;
+    return (
+      <Preview
+        chat={chat}
+        key={chat.id}
+        handleStartExistingChat={handleStartExistingChat}
+      />
+    );
   });
 
   // renders new message modal
