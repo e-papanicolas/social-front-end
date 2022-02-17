@@ -20,7 +20,6 @@ const FeedPosts = ({ post }) => {
       if (res.ok) {
         res.json().then((data) => {
           setLikes(likeHeart ? likes - 1 : likes + 1);
-          console.log(data);
         });
       } else {
         res.json().then((data) => {

@@ -12,7 +12,7 @@ export default function ChatMessage({ data }) {
         <p className="bg-sky-500 rounded-tl-xl rounded-tr-xl rounded-bl-xl p-3 justify-end w-1/2 mr-2">
           {data.content}
         </p>
-        <p className="mr-2">
+        <p className="mr-2 text-xs">
           {date.slice(0, 10)} {date.slice(16, 21)}
         </p>
       </div>
@@ -23,7 +23,7 @@ export default function ChatMessage({ data }) {
         <p className="bg-slate-100 rounded-tl-xl rounded-tr-xl rounded-br-xl p-3 justify-start w-1/2">
           {data.content}
         </p>
-        <p>
+        <p className="text-xs">
           {date.slice(0, 10)} {date.slice(16, 21)}
         </p>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { UserContext } from "../../App";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 export default function Preview({
   chat,
@@ -16,14 +16,17 @@ export default function Preview({
   return (
     <>
       <div onClick={() => handleStartExistingChat(chat)}>
-        <div>{chat.sender.avatar}</div>
+        <img
+          src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+          className="rounded-full w-10 p-2"
+          alt="Avatar"
+        />
         <div>
           <p>
             {chat.sender.first_name} {chat.sender.last_name} @
             {chat.sender.username}
           </p>
           <p>{date}</p>
-          <p>preview here</p>
         </div>
       </div>
       <button onClick={() => handleDeleteChat(chat)}>X</button>
