@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { NumberWithCommas } from "../ToolComponents/NumberWithCommas";
 
+
+
 const FeedPosts = ({ post }) => {
   const token = localStorage.getItem("jwt");
   const [likes, setLikes] = useState(post.likes);
+  const [likeHeart, setLikeHeart] = useState(false)
 
   function handleNewLike() {
+    setLikeHeart(!likeHeart);
     fetch(`http://localhost:3000/posts/${post.id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ likes: likes + 1 }),
+      body: JSON.stringify({ likes: (likeHeart ?  likes - 1 : likes + 1) }),
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          setLikes(likes + 1);
+          setLikes(likeHeart ?  likes - 1 : likes + 1);
           console.log(data);
         });
       } else {
@@ -45,13 +49,14 @@ const FeedPosts = ({ post }) => {
         <small className="self-center">{CreatedDate(post)}</small>
       </div>
       <p className="px-3">{post.content}</p>
-      <small className="ml-3">Likes: {NumberWithCommas(likes)}</small>
-      <button
-        onClick={handleNewLike}
-        className="max-w-fit px-1 rounded-md ml-2 text-white ring-2 ring-gray-300 my-2 bg-gray-400 hover:bg-gray-600 hidden group-hover:block"
-      >
-        Like
-      </button>
+      <div className="flex">
+        <button 
+          onClick={handleNewLike}
+          className="max-w-fit px-1 ml-2 text-red-500 hidden group-hover:block">
+          {likeHeart ? "♥" : "♡"} 
+        </button>
+        <small className="ml-1 hidden group-hover:block">{NumberWithCommas(likes)} {likes === 1 ? "person likes this" : "people like this"}</small>
+      </div>
     </div>
   );
 };
