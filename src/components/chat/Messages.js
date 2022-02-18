@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
 import Preview from "./Preview";
 import { ActionCableProvider } from "react-actioncable-provider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Messages({ allUsers }) {
   const user = useContext(UserContext);
@@ -173,18 +174,23 @@ function Messages({ allUsers }) {
         </div>
       ) : null}
 
-      <div className=" min-h-screen max-h-screen pl-72 grid grid-cols-2 overflow-hidden pt-5">
-        <div className="h-full overflow-y-hidden">
-          <h1 className="font-bold text-xl">Messages</h1>
-          <button onClick={handleNewMessage}>+ NEWMSG</button>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="search chats"
-              value={messageSearch}
-              onChange={(e) => setMessageSearch(e.target.value)}
-            ></input>
-          </form>
+      <div className=" min-h-screen max-h-screen pl-72 grid grid-cols-3 overflow-hidden pt-5">
+        <div className="h-full overflow-y-hidden border-r-[1px]">
+          <div className="flex flex-col w-full border-b-[1px]">
+            <div className="flex justify-between pr-10">
+              <h1 className="font-bold text-xl">Messages</h1>
+              <button onClick={handleNewMessage}>+ NEWMSG</button>
+            </div>
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                placeholder="search chats"
+                value={messageSearch}
+                onChange={(e) => setMessageSearch(e.target.value)}
+                className="border p-1 mt-2 mb-2 rounded-md"
+              ></input>
+            </form>
+          </div>
           {chats.length > 0
             ? chats.map((chat) => {
                 return (
@@ -198,7 +204,7 @@ function Messages({ allUsers }) {
               })
             : null}
         </div>
-        <div>
+        <div className="col-span-2">
           {currentChat ? (
             <ActionCableProvider url="ws://tweet-tweeter.herokuapp.com/cable">
               <Chat

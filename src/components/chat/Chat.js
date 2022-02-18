@@ -62,9 +62,9 @@ function Chat({ friend, messages, setMessages, chatID }) {
       <div className="absolute bottom-0 right-0 w-2/5">
         <form onSubmit={handleSendMessage}>
           <input
-            className="m-3 p-2 w-4/6 rounded-md"
+            className="m-3 p-2 w-4/6 rounded-md border"
             type="textarea"
-            placeholder="start typing a message"
+            placeholder="Start typing a message"
             value={newMsg}
             onChange={(e) => {
               setNewMsg(e.target.value);
