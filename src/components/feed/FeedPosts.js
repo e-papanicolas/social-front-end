@@ -41,7 +41,7 @@ const FeedPosts = ({ post }) => {
           alt="Avatar"
         />
         <p className="max-w-fit my-1 p-1 rounded-lg font-semibold">
-          {post.user.username}
+          {`@${post.user.username}`}
         </p>
         <small className="self-center">{CreatedDate(post)}</small>
       </div>

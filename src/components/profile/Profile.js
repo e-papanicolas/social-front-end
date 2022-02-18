@@ -78,7 +78,7 @@ function Profile({ setUser }) {
             {user.first_name[0].toUpperCase() + user.first_name.slice(1)}{" "}
             {user.last_name[0].toUpperCase() + user.last_name.slice(1)}
           </h2>
-          <h2 className="font-bold">{user.username}</h2>
+          <h2 className="font-bold">{`@${user.username}`}</h2>
           <div>
             <p>You currently have {user.friends.length} friends</p>
           </div>
