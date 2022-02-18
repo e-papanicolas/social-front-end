@@ -29,7 +29,7 @@ function Messages({ allUsers }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setChats(data);
       });
   }, [token, user, update]);
@@ -155,7 +155,7 @@ function Messages({ allUsers }) {
                         {user.last_name[0].toUpperCase() +
                           user.last_name.slice(1)}
                       </p>
-                      <p className="text-slate-400">{user.username}</p>
+                      <p className="text-slate-400">{`@${user.username}`}</p>
                     </div>
                   </div>
                 );

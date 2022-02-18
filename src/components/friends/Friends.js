@@ -52,7 +52,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                         {friend.first_name} {friend.last_name}
                       </p>
                       <p className="pl-2 pt-3.5 text-gray-700 text-xs">
-                        {friend.username}
+                        {`@${friend.username}`}
                       </p>
                     </li>
                   </ul>
@@ -93,7 +93,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                       {friend.first_name} {friend.last_name}
                     </p>
                     <p className="pl-2 pt-3.5 text-gray-700 text-xs">
-                      {friend.username}
+                      {`@${friend.username}`}
                     </p>
                   </li>
                   <button
@@ -136,7 +136,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                         {friend.first_name} {friend.last_name}
                       </p>
                       <p className="pl-2 pt-3.5 text-gray-700 text-xs">
-                        {friend.username}
+                        {`@${friend.username}`}
                       </p>
                     </li>
                   </ul>

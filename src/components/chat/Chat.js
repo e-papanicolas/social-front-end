@@ -45,10 +45,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
     }
   }
 
-  // function closeChat() {
-  //   setView(!view);
-  // }
-
   return (
     <>
       <ActionCableConsumer
@@ -79,12 +75,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
             className="w-1/6 bg-white m-3 p-2 rounded-md text-white bg-sky-500 "
           >
             SEND
-          </button>
-          <button
-            className="w-1/6 bg-white m-3 p-2 rounded-md text-sky-500"
-            // onClick={closeChat}
-          >
-            X
           </button>
         </form>
       </div>
