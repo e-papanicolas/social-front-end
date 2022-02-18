@@ -21,7 +21,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
 
   function handleSendMessage(e) {
     e.preventDefault();
-    fetch(`http://localhost:3000/chat_messages`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/chat_messages`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ function Chat({ friend, messages, setMessages, chatID }) {
         channel={channelObject}
         onReceived={(data) => handleRecieveData(data)}
       >
-        <div className="h-4/6 mt-10 overflow-y-scroll">
+        <div className="h-5/6 mt-10 overflow-y-scroll">
           {messages
             ? messages.map((msg) => {
                 return <ChatMessage key={msg.id} data={msg} />;

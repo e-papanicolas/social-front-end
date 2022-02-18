@@ -11,7 +11,7 @@ const FeedPosts = ({ post }) => {
 
   function handleNewLike() {
     setLikeHeart(!likeHeart);
-    fetch(`http://localhost:3000/posts/${post.id}`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/posts/${post.id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -37,14 +37,11 @@ const FeedPosts = ({ post }) => {
       className="flex flex-col mr-20 rounded-md my-2 bg-sky-200 group px-2 py-1"
     >
       <div className="flex flex-row">
-        <img
-          src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
-          className="rounded-full w-10 p-2"
-          alt="Avatar"
-        />
+        <img src={user.avatar} className="rounded-full w-10 p-2" alt="Avatar" />
         <p className="max-w-fit my-1 p-1 rounded-lg font-semibold">
-
-          {post.user.username === user.username ? "You" : `@${post.user.username}`}
+          {post.user.username === user.username
+            ? "You"
+            : `@${post.user.username}`}
         </p>
         <small className="self-center">{CreatedDate(post)}</small>
       </div>

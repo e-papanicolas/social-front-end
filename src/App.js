@@ -36,7 +36,7 @@ function App() {
 
   // verifies user for auth
   useEffect(() => {
-    fetch("http://localhost:3000/me", {
+    fetch("http://tweet-tweeter.herokuapp.com/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -54,7 +54,7 @@ function App() {
       }
     }, []);
 
-    fetch("http://localhost:3000/posts", {
+    fetch("http://tweet-tweeter.herokuapp.com/posts", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -74,7 +74,7 @@ function App() {
   function handleAddPost(newPost, e) {
     e.preventDefault();
 
-    fetch("http://localhost:3000/posts", {
+    fetch("http://tweet-tweeter.herokuapp.com/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function App() {
 
   // gets all users
   useEffect(() => {
-    fetch("http://localhost:3000/users", {
+    fetch("http://tweet-tweeter.herokuapp.com/users", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -118,7 +118,7 @@ function App() {
     const updatedFriends = [...currentUser.friends, friendId];
     currentUser.friends = updatedFriends;
 
-    fetch(`http://localhost:3000/add_friend/${currentUser.id}`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/add_friend/${currentUser.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

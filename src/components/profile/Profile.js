@@ -24,7 +24,7 @@ function Profile({ setUser }) {
   };
 
   const submitBioEdit = () => {
-    fetch(`http://localhost:3000/update_bio/${user.id}`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/update_bio/${user.id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ function Profile({ setUser }) {
     if (confirmDelete === user.username) {
       console.log("deleted");
 
-      fetch(`http://localhost:3000/users/${user.id}`, {
+      fetch(`http://tweet-tweeter.herokuapp.com/users/${user.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -154,7 +154,7 @@ function Profile({ setUser }) {
             </button>
           </div>
           {deleteWarning ? (
-            <div className="w-full">
+            <div className="w-full flex flex-col items-center">
               <p className="text-center">
                 <strong>WARNING:</strong> You are about to delete your account.
                 This cannot be undone.

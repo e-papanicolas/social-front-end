@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import test from "../../image/test.jpeg";
 
 import { NavLink } from "react-router-dom";
 
@@ -58,7 +59,7 @@ function Login({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
+    fetch("http://tweet-tweeter.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,9 +90,9 @@ function Login({ onLogin }) {
           sm={4}
           md={7}
           sx={{
-            // backgroundImage:
-            //   "url(https://images.unsplash.com/photo-1508924445640-6ab6b79bce04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60)",
-            //backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(${test})`,
+            backgroundRepeat: "no-repeat",
+
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
@@ -100,7 +101,7 @@ function Login({ onLogin }) {
             backgroundPosition: "center",
           }}
         >
-          <h1 className="text-blue-400 text-8xl">TWEETER</h1>
+          <h1 className="ml-10 mt-10 text-white text-8xl">TWEETER</h1>
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
@@ -112,9 +113,7 @@ function Login({ onLogin }) {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <Avatar sx={{ m: 1, bgcolor: "#0ea5e9" }}></Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -147,26 +146,35 @@ function Login({ onLogin }) {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {errors ? <p>{errors.error}</p> : null}
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: "#0ea5e9",
+                  color: "#fff",
+                  "&:hover": {
+                    backgroundColor: "#0284c7",
+                    color: "#fff",
+                  },
+                }}
               >
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+                <Grid item xs></Grid>
                 <Grid item>
-                  <NavLink to="/signup" variant="body2">
+                  <NavLink
+                    to="/signup"
+                    variant="body2"
+                    sx={{
+                      underline: {
+                        borderBottom: "2px solid white",
+                      },
+                    }}
+                  >
                     Don't have an account? Sign Up
                   </NavLink>
                 </Grid>

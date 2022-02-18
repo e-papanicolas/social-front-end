@@ -44,7 +44,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                       className="flex bg-sky-300 rounded my-1 pr-5 w-full"
                     >
                       <img
-                        src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+                        src={user.avatar}
                         className="rounded-full w-10 p-2"
                         alt="Avatar"
                       />
@@ -81,11 +81,11 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
         <div className="mt-5">
           {searchList.map((friend) => {
             return (
-              <div key={friend.id} className="h-full overflow-y-scroll">
+              <div key={friend.id}>
                 <ul className="flex group">
                   <li className="flex bg-sky-300 rounded my-1 px-5 w-full">
                     <img
-                      src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+                      src={user.avatar}
                       className="rounded-full w-10 p-2"
                       alt="Avatar"
                     />
@@ -120,15 +120,9 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
               return (
                 <div key={friend.id}>
                   <ul className="flex group">
-                    <button
-                      className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded hover:bg-sky-400 hidden group-hover:block"
-                      onClick={() => handleAddFriend(friend.id)}
-                    >
-                      Follow
-                    </button>
                     <li className="flex bg-sky-300 rounded my-1 px-5 w-full">
                       <img
-                        src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+                        src={user.avatar}
                         className="rounded-full w-10 p-2"
                         alt="Avatar"
                       />
@@ -139,6 +133,12 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                         {`@${friend.username}`}
                       </p>
                     </li>
+                    <button
+                      className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded hover:bg-sky-400 hidden group-hover:block"
+                      onClick={() => handleAddFriend(friend.id)}
+                    >
+                      Follow
+                    </button>
                   </ul>
                 </div>
               );

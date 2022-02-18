@@ -22,7 +22,7 @@ function NavBar({ handleLogOut }) {
           <div className="flex mt-5">
             <div className="shrink-0">
               <img
-                src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
+                src={user.avatar}
                 className="rounded-full w-10"
                 alt="Avatar"
               />

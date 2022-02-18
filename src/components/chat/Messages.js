@@ -20,7 +20,7 @@ function Messages({ allUsers }) {
 
   // get all of users chats
   useEffect(() => {
-    fetch(`http://localhost:3000/chats/${user.id}`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/chats/${user.id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ function Messages({ allUsers }) {
 
   // handles deleting a chat
   function handleDeleteChat(chat) {
-    fetch(`http://localhost:3000/chats/${chat.id}`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/chats/${chat.id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ function Messages({ allUsers }) {
     setPopup(!popup);
     setChatFriend(new_user);
 
-    fetch(`http://localhost:3000/chats`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/chats`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ function Messages({ allUsers }) {
 
   // starts chat that already exists in preview
   function handleStartExistingChat(chat) {
-    fetch(`http://localhost:3000/chats`, {
+    fetch(`http://tweet-tweeter.herokuapp.com/chats`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -200,7 +200,7 @@ function Messages({ allUsers }) {
         </div>
         <div>
           {currentChat ? (
-            <ActionCableProvider url="ws://localhost:3000/cable">
+            <ActionCableProvider url="ws://tweet-tweeter.herokuapp.com/cable">
               <Chat
                 friend={chatFriend}
                 messages={messages}

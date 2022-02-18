@@ -14,13 +14,9 @@ export default function Preview({
   const date = new Date(chat.updated_at).toString();
 
   return (
-    <>
+    <div className="cursor-pointer">
       <div onClick={() => handleStartExistingChat(chat)}>
-        <img
-          src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
-          className="rounded-full w-10 p-2"
-          alt="Avatar"
-        />
+        <img src={user.avatar} className="rounded-full w-10 p-2" alt="Avatar" />
         <div>
           <p>
             {chat.sender.first_name} {chat.sender.last_name} @
@@ -30,6 +26,6 @@ export default function Preview({
         </div>
       </div>
       <button onClick={() => handleDeleteChat(chat)}>X</button>
-    </>
+    </div>
   );
 }
