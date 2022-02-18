@@ -3,7 +3,7 @@ import { CreatedDate } from "../ToolComponents/CreatedDate";
 
 const UserPost = ({ post }) => {
   return (
-    <div className="ml-2 w-11/12 flex flex-col p-1 rounded-md ring-2 ring-sky-400 my-2 bg-sky-200 group">
+    <div className="ml-2 w-11/12 flex flex-col py-2 px-3 rounded-md my-2 bg-sky-200 group">
       <div className="flex items-end">
         <img
           src={post.user.avatar}
@@ -16,7 +16,7 @@ const UserPost = ({ post }) => {
         <p>{post.content}</p>
       </div>
       <div>
-        <small>Likes: 0 (not implemented yet)</small>
+        <small>Likes: {post.likes}</small>
       </div>
     </div>
   );

@@ -61,17 +61,17 @@ function Profile({ setUser }) {
     }
   };
   return (
-    <div className="min-h-screen min-w-screen pt-40 flex justify-center ">
+    <div className="min-h-screen w-screen pt-40 flex justify-center ">
       <div className="ml-10 flex flex-col items-center">
         <div className="absolute top-0 h-60 -z-1 w-full bg-slate-400 flex justify-center items-center">
           <p className="text-white">Upload a banner here!</p>
         </div>
-        <span className="w-64 h-64 flex flex-col items-center">
+        <span className="w-96 h-64 flex flex-col items-center">
           <span className="z-10">
             <img
               src={user.avatar}
               alt="user avatar"
-              className="h-40 w-40 object-cover rounded-full border-4 border-white "
+              className="h-40 w-40 object-cover rounded-full border-4 border-white bg-slate-400"
             />
           </span>
           <h2>
