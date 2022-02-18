@@ -41,7 +41,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                   <ul className="group flex w-96">
                     <li
                       key={friend.username}
-                      className="flex bg-sky-300 border border border-sky-500 rounded my-1 px-5 w-full"
+                      className="flex bg-sky-300 rounded my-1 pr-5 w-full"
                     >
                       <img
                         src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
@@ -65,7 +65,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
         </div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col w-1/3">
         <div className="">
           <label className="text-2xl font-bold text-gray-700 mr-3">
             Find a friend:
@@ -83,7 +83,7 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
             return (
               <div key={friend.id} className="h-full overflow-y-scroll">
                 <ul className="flex group">
-                  <li className="flex bg-sky-300 border border border-sky-500 rounded my-1 px-5 w-full">
+                  <li className="flex bg-sky-300 rounded my-1 px-5 w-full">
                     <img
                       src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
                       className="rounded-full w-10 p-2"
@@ -95,15 +95,9 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                     <p className="pl-2 pt-3.5 text-gray-700 text-xs">
                       {friend.username}
                     </p>
-                    {/* <button
-                        className=" p-0.5 m-2 text-gray-700 bg-gray-400 text-xs rounded hover:bg-gray-500"
-                        onClick={() => handleAddFriend(friend.id)}
-                      >
-                        Unfriend
-                      </button> */}
                   </li>
                   <button
-                    className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded border border-sky-500 hover:bg-sky-400 hidden group-hover:block"
+                    className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded hover:bg-sky-400 hidden group-hover:block"
                     onClick={() => handleAddFriend(friend.id)}
                   >
                     Follow
@@ -126,7 +120,13 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
               return (
                 <div key={friend.id}>
                   <ul className="flex group">
-                    <li className="flex bg-sky-300 border border border-sky-500 rounded my-1 px-5 w-full">
+                    <button
+                      className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded hover:bg-sky-400 hidden group-hover:block"
+                      onClick={() => handleAddFriend(friend.id)}
+                    >
+                      Follow
+                    </button>
+                    <li className="flex bg-sky-300 rounded my-1 px-5 w-full">
                       <img
                         src="https://img.icons8.com/external-bearicons-glyph-bearicons/64/000000/external-User-essential-collection-bearicons-glyph-bearicons.png"
                         className="rounded-full w-10 p-2"
@@ -139,12 +139,6 @@ function Friends({ allUsers, handleAddFriend, friendsList }) {
                         {friend.username}
                       </p>
                     </li>
-                    <button
-                      className=" p-0.5 px-1 m-2 text-gray-700 bg-sky-300 text-xs rounded border border-sky-500 hover:bg-sky-400 hidden group-hover:block"
-                      onClick={() => handleAddFriend(friend.id)}
-                    >
-                      Follow
-                    </button>
                   </ul>
                 </div>
               );

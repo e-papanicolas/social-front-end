@@ -19,6 +19,7 @@ function Feed({ posts, handleAddPost }) {
   );
 
   //Takes each friend and pushes post into empty array
+  user.posts.map((post) => friendsPostsArray.push(post));
   friendsPosts.map((user) => {
     return user.map((posts) => friendsPostsArray.push(posts));
   });
@@ -40,7 +41,9 @@ function Feed({ posts, handleAddPost }) {
   return (
     <div className="min-h-screen flex flex-col pl-72 pt-10">
       <div id="welcome">
-        <h1 className="text-xl font-bold mb-2">WELCOME {user.first_name}</h1>
+        <h1 className="text-xl font-bold mb-2">
+          WELCOME {user.first_name[0].toUpperCase() + user.first_name.slice(1)}!
+        </h1>
       </div>
       <form
         onSubmit={(e) => handleAddPost(newPost, e)}

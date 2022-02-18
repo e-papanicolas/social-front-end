@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../App";
 import { CreatedDate } from "../ToolComponents/CreatedDate";
 import { NumberWithCommas } from "../ToolComponents/NumberWithCommas";
 
@@ -6,6 +7,7 @@ const FeedPosts = ({ post }) => {
   const token = localStorage.getItem("jwt");
   const [likes, setLikes] = useState(post.likes);
   const [likeHeart, setLikeHeart] = useState(false);
+  const user = useContext(UserContext);
 
   function handleNewLike() {
     setLikeHeart(!likeHeart);
@@ -32,7 +34,7 @@ const FeedPosts = ({ post }) => {
   return (
     <div
       key={post.content}
-      className="flex flex-col mr-20 rounded-md ring-2 ring-sky-400 my-2 bg-sky-200 group "
+      className="flex flex-col mr-20 rounded-md my-2 bg-sky-200 group px-2 py-1"
     >
       <div className="flex flex-row">
         <img
@@ -41,7 +43,7 @@ const FeedPosts = ({ post }) => {
           alt="Avatar"
         />
         <p className="max-w-fit my-1 p-1 rounded-lg font-semibold">
-          {post.user.username}
+          {post.user.username === user.username ? "You" : post.user.username}
         </p>
         <small className="self-center">{CreatedDate(post)}</small>
       </div>

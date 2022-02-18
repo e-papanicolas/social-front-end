@@ -32,7 +32,7 @@ function Copyright(props) {
         Katherine Roll
       </Link>
       {", "}
-      <Link color="inherit" href="https://hung-le-swe.netlify.app">
+      <Link color="inherit" href="https://hung-le.com">
         Hung Le
       </Link>{" "}
       {new Date().getFullYear()}
