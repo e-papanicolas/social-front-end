@@ -9,7 +9,7 @@ export default function Preview({
 }) {
   const user = useContext(UserContext);
 
-  console.log(chat);
+  // console.log(chat);
 
   const date = new Date(chat.updated_at).toString();
 

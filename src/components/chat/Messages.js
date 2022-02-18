@@ -29,7 +29,7 @@ function Messages({ allUsers }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setChats(data);
       });
   }, [token, user, update]);
