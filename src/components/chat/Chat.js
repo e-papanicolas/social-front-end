@@ -29,11 +29,6 @@ function Chat({ friend, messages, setMessages, chatID }) {
       },
       body: JSON.stringify(newMessageObj),
     }).then(() => setNewMsg(""));
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   setMessages([...messages, data]);
-    //   console.log(data);
-    // });
   }
 
   function handleRecieveData(data) {

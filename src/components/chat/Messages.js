@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
 import Preview from "./Preview";
 import { ActionCableProvider } from "react-actioncable-provider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Messages({ allUsers }) {
   const user = useContext(UserContext);
@@ -30,7 +29,6 @@ function Messages({ allUsers }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setChats(data);
       });
   }, [token, user, update]);

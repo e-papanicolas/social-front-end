@@ -1,7 +1,7 @@
 # tweeter
 
-A social media clone made with React.
-Back end [here](https://github.com/e-papanicolas/social-back-end)
+A clone of popular social media features made with React.
+Ruby on Rails back end [here](https://github.com/e-papanicolas/social-back-end)
 
 ### creators
 
