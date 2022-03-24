@@ -2,7 +2,6 @@ import { UserContext } from "../../App";
 import { useContext, useState, useEffect } from "react";
 import Chat from "./Chat";
 import Preview from "./Preview";
-import { ActionCableProvider } from "react-actioncable-provider";
 
 function Messages({ allUsers }) {
   const user = useContext(UserContext);
@@ -204,14 +203,12 @@ function Messages({ allUsers }) {
         </div>
         <div className="col-span-2">
           {currentChat ? (
-            <ActionCableProvider url="ws://tweet-tweeter.herokuapp.com/cable">
-              <Chat
-                friend={chatFriend}
-                messages={messages}
-                chatID={chatID}
-                setMessages={setMessages}
-              />
-            </ActionCableProvider>
+            <Chat
+              friend={chatFriend}
+              messages={messages}
+              chatID={chatID}
+              setMessages={setMessages}
+            />
           ) : null}
         </div>
       </div>

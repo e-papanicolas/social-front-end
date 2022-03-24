@@ -1,17 +1,52 @@
 import { UserContext } from "../../App";
-import { useContext, useState } from "react";
-import { ActionCableConsumer } from "react-actioncable-provider";
+import { useContext, useState, useRef, useEffect } from "react";
 import ChatMessage from "./ChatMessage";
+import { createConsumer } from "@rails/actioncable";
 
 function Chat({ friend, messages, setMessages, chatID }) {
   const user = useContext(UserContext);
   const token = localStorage.getItem("jwt");
   const [newMsg, setNewMsg] = useState("");
+  const cable = useRef();
 
-  const channelObject = {
-    channel: "ChatChannel",
-    chat_id: chatID,
-  };
+  useEffect(() => {
+    if (!cable.current) {
+      cable.current = createConsumer("ws://tweet-tweeter.herokuapp.com/cable");
+    }
+
+    const channelObject = {
+      channel: "ChatChannel",
+      chat_id: chatID,
+    };
+
+    const handlers = {
+      received(data) {
+        console.log(data);
+        if (data.messages) {
+          setMessages(data.messages);
+        } else if (data.content) {
+          setMessages([...messages, data]);
+        }
+      },
+      connected() {
+        console.log("connected");
+      },
+      disconnected() {
+        console.log("disconnected");
+        cable.current = null;
+      },
+    };
+
+    const subscription = cable.current.subscriptions.create(
+      channelObject,
+      handlers
+    );
+
+    return function cleanup() {
+      cable.current = null;
+      subscription.unsubscribe();
+    };
+  }, [chatID, messages]);
 
   const newMessageObj = {
     user_id: user.id,
@@ -31,29 +66,15 @@ function Chat({ friend, messages, setMessages, chatID }) {
     }).then(() => setNewMsg(""));
   }
 
-  function handleRecieveData(data) {
-    console.log(data);
-    if (data.messages) {
-      setMessages(data.messages);
-    } else if (data.content) {
-      setMessages([...messages, data]);
-    }
-  }
-
   return (
     <>
-      <ActionCableConsumer
-        channel={channelObject}
-        onReceived={(data) => handleRecieveData(data)}
-      >
-        <div className="h-5/6 mt-10 overflow-y-scroll">
-          {messages
-            ? messages.map((msg) => {
-                return <ChatMessage key={msg.id} data={msg} />;
-              })
-            : null}
-        </div>
-      </ActionCableConsumer>
+      <div className="h-5/6 mt-10 overflow-y-scroll">
+        {messages
+          ? messages.map((msg) => {
+              return <ChatMessage key={msg.id} data={msg} />;
+            })
+          : null}
+      </div>
       <div className="absolute bottom-0 right-0 w-2/5">
         <form onSubmit={handleSendMessage}>
           <input

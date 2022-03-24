@@ -76,6 +76,7 @@ function SignUp({ handleLogin }) {
       } else {
         res.json().then((json) => {
           setErrors(json.errors);
+          console.log(json.errors);
         });
       }
     });
@@ -93,7 +94,7 @@ function SignUp({ handleLogin }) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#0ea5e9" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
